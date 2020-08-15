@@ -1,0 +1,6 @@
+.subjlist{
+    overflow-y: hidden;
+    display: flex;
+    flex-direction: column;
+    border: 2 solid px red;
+}
