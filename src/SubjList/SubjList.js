@@ -16,7 +16,6 @@ const theme = createMuiTheme({
 })
 
 export default function ClassList({ onSelection }) {
-
     return (
         <div className="subjlist">
             <InfiniteScroll
@@ -33,7 +32,10 @@ export default function ClassList({ onSelection }) {
                         size="large"
                         color="secondary"
                         style={{height:"100%", padding:-5}}
-                        onClick={() => onSelection(indiv_class)}
+                        onClick={() => {
+                                onSelection(indiv_class);
+                            }
+                        } 
                         >   
                             <ThemeProvider theme={theme}>
                                 <Typography variant="subtitle2">

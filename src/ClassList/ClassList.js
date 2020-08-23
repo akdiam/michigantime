@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useReducer, useEffect } from 'react';
 import ClassListing from './FA2020';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from '@material-ui/core/Button';
@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import { createMuiTheme } from '@material-ui/core'
 import './ClassList.css';
 import { ThemeProvider } from '@material-ui/core';
+import { store } from '../Store';
 
 const theme = createMuiTheme({
     typography: {
@@ -16,7 +17,7 @@ const theme = createMuiTheme({
             fontWeight: 2000,
         },
     }
-})
+});
 
 export default function ClassList({ current_classes, onSelect, current_subj, onBack }) {
     const subj_to_find = '(' + current_subj + ')';
@@ -32,12 +33,12 @@ export default function ClassList({ current_classes, onSelect, current_subj, onB
     });
 
     const gatherAllClasses = (cat_num) => {
-        let specific_class_list = relevant_classes.filter(subj => subj['Catalog Nbr'] === cat_num)
-        const lecs = specific_class_list.filter(subj => subj['Component'] === 'LEC')
-        const discs = specific_class_list.filter(subj => subj['Component'] === 'DIS')
-        const labs = specific_class_list.filter(subj => subj['Component'] === 'LAB')
-        const sems = specific_class_list.filter(subj => subj['Component'] === 'SEM')
-        const recs = specific_class_list.filter(subjs => subjs['Component'] === 'REC')
+        let specific_class_list = relevant_classes.filter(subj => subj['Catalog Nbr'] === cat_num);
+        const lecs = specific_class_list.filter(subj => subj['Component'] === 'LEC');
+        const discs = specific_class_list.filter(subj => subj['Component'] === 'DIS');
+        const labs = specific_class_list.filter(subj => subj['Component'] === 'LAB');
+        const sems = specific_class_list.filter(subj => subj['Component'] === 'SEM');
+        const recs = specific_class_list.filter(subjs => subjs['Component'] === 'REC');
 
         const obj = {};
         if (lecs.length !== 0) {
@@ -56,7 +57,9 @@ export default function ClassList({ current_classes, onSelect, current_subj, onB
             obj['REC'] = recs;
         }
         return obj;
-    }
+    };
+
+    const { classList, addClass } = store();
 
     return (
         <div className="classlist">
@@ -85,14 +88,18 @@ export default function ClassList({ current_classes, onSelect, current_subj, onB
                                     size="large"
                                     color="secondary"
                                     style={{height:"100%", padding:-5}}
-                                    onClick={() => { 
+                                    onClick={() => {
                                         const class_to_add = gatherAllClasses(indiv_class['Catalog Nbr']);
-                                        current_classes[current_subj+indiv_class['Catalog Nbr']] = class_to_add;
-                                        onSelect(current_classes);
-                                    }}
+                                        const class_name = current_subj+indiv_class['Catalog Nbr'];
+                                        addClass(class_to_add, class_name);
+                                    }
+                                        /*() => {
+                                        
+                                        dispatch({ class_to_add, class_name }); 
+                                    }*/}
                                     >
                                         <ThemeProvider theme={theme}>
-                                            <Grid container spacing={-1} direction="column">
+                                            <Grid container spacing={0} direction="column">
                                                 <Grid item xs={12}>
                                                     <Typography variant="subtitle2">
                                                     {current_subj}{indiv_class['Catalog Nbr']} 

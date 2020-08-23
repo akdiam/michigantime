@@ -10,7 +10,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",
-    "react-scripts": "3.4.3"
+    "react-scripts": "3.4.3",
+    "zustand": "^3.0.1"
   },
   "scripts": {
     "start": "react-scripts start",

@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header/Header';
@@ -7,6 +7,8 @@ import Paper from '@material-ui/core/Paper'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
+import { store } from './Store';
+import shallow from 'zustand/shallow';
 
 const theme = createMuiTheme({
   palette: {
@@ -25,7 +27,6 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
-  const [classList, updateList] = useState({});
 
   return (
     <div className="container">
@@ -41,10 +42,8 @@ function App(){
                 <SubjList
                   onSelection={chosen_subj => selectSubj(chosen_subj)}
                 /> 
-                  : 
+                : 
                 <ClassList
-                  current_classes={classList}
-                  onSelect={class_list => updateList(class_list)}
                   current_subj={currentSubj}
                   onBack={() => selectSubj('')}
                 />
