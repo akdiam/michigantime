@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Grid from '@material-ui/core/Grid';
 import Header from './Header/Header';
@@ -7,8 +7,8 @@ import Paper from '@material-ui/core/Paper'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
+import ScheduledClasses from './ScheduledClasses/ScheduledClasses';
 import { store } from './Store';
-import shallow from 'zustand/shallow';
 
 const theme = createMuiTheme({
   palette: {
@@ -27,6 +27,7 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
+  const { init } = store();
 
   return (
     <div className="container">
@@ -49,12 +50,10 @@ function App(){
                 />
                 }
               </Grid>
-              <Grid item xs = {2}>
-                <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Varius sit amet mattis vulputate enim nulla aliquet porttitor lacus. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Fringilla ut morbi tincidunt augue interdum velit. Nunc id cursus metus aliquam. Quisque id diam vel quam elementum pulvinar etiam. Nunc id cursus metus aliquam eleifend. Ipsum consequat nisl vel pretium lectus quam. Ut tellus elementum sagittis vitae et leo duis ut. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Enim ut tellus elementum sagittis vitae et leo. Viverra orci sagittis eu volutpat odio facilisis mauris. Ut eu sem integer vitae. Mauris pharetra et ultrices neque ornare. At ultrices mi tempus imperdiet nulla. Augue mauris augue neque gravida in. Euismod nisi porta lorem mollis aliquam ut porttitor. Risus feugiat in ante metus dictum at tempor
-                </Typography>
+              <Grid item xs = {3} style={{maxHeight:"100%", overflow:"auto"}}>
+                <ScheduledClasses/>
               </Grid>
-              <Grid item xs = {8}>
+              <Grid item xs = {7}>
                 <Typography>
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Varius sit amet mattis vulputate enim nulla aliquet porttitor lacus. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Fringilla ut morbi tincidunt augue interdum velit. Nunc id cursus metus aliquam. Quisque id diam vel quam elementum pulvinar etiam. Nunc id cursus metus aliquam eleifend. Ipsum consequat nisl vel pretium lectus quam. Ut tellus elementum sagittis vitae et leo duis ut. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Enim ut tellus elementum sagittis vitae et leo. Viverra orci sagittis eu volutpat odio facilisis mauris. Ut eu sem integer vitae. Mauris pharetra et ultrices neque ornare. At ultrices mi tempus imperdiet nulla. Augue mauris augue neque gravida in. Euismod nisi porta lorem mollis aliquam ut porttitor. Risus feugiat in ante metus dictum at tempor
                 </Typography>

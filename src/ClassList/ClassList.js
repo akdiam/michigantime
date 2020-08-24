@@ -1,4 +1,4 @@
-import React, { useReducer, useEffect } from 'react';
+import React from 'react';
 import ClassListing from './FA2020';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from '@material-ui/core/Button';
@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     }
 });
 
-export default function ClassList({ current_classes, onSelect, current_subj, onBack }) {
+export default function ClassList({ current_subj, onBack }) {
     const subj_to_find = '(' + current_subj + ')';
     const relevant_classes = ClassListing.filter(subj => subj['Subject'].includes(subj_to_find));
     let seen_nbrs = {};
@@ -59,7 +59,7 @@ export default function ClassList({ current_classes, onSelect, current_subj, onB
         return obj;
     };
 
-    const { classList, addClass } = store();
+    const { addClass, addTitle } = store();
 
     return (
         <div className="classlist">
@@ -91,12 +91,10 @@ export default function ClassList({ current_classes, onSelect, current_subj, onB
                                     onClick={() => {
                                         const class_to_add = gatherAllClasses(indiv_class['Catalog Nbr']);
                                         const class_name = current_subj+indiv_class['Catalog Nbr'];
+                                        const class_title = indiv_class['Course Title'];
                                         addClass(class_to_add, class_name);
-                                    }
-                                        /*() => {
-                                        
-                                        dispatch({ class_to_add, class_name }); 
-                                    }*/}
+                                        addTitle(class_title, class_name);
+                                    }}
                                     >
                                         <ThemeProvider theme={theme}>
                                             <Grid container spacing={0} direction="column">
