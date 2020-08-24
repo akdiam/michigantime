@@ -25,13 +25,12 @@ export default function IndivSection({ item, class_name }) {
     const [isActive, toggleActive] = useState(false);
 
     const { themeObj } = store();
-    const theme_arr = Themes();
-    const COLOR_SCHEME = theme_arr[themeObj[class_name]];
+    const COLOR_SCHEME = Themes[themeObj[class_name]];
     const paperTheme = createMuiTheme({
         overrides: {
             MuiPaper: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.palette.primary.light,
+                    backgroundColor: COLOR_SCHEME.light,
                 }
             }
         },

@@ -29,8 +29,7 @@ export default function IndivClass({ class_name }) {
     const keys = Object.keys(classObj);
     const title = classTitles[class_name];
     const [isExpanded, changeExpansion] = useState(true);
-    const theme_arr = Themes();
-    const COLOR_SCHEME = theme_arr[themeObj[class_name]];
+    const COLOR_SCHEME = Themes[themeObj[class_name]];
     console.log(COLOR_SCHEME);
 
     const accordianTheme = createMuiTheme({
@@ -42,7 +41,7 @@ export default function IndivClass({ class_name }) {
             },
             MuiButtonBase: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.palette.primary.dark,
+                    backgroundColor: COLOR_SCHEME.dark,
                 }
             }
         },

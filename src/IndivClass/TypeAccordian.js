@@ -25,13 +25,12 @@ const theme = createMuiTheme({
 
 export default function TypeAccordian({ display_type, display_object, class_name }) {
     const { themeObj } = store();
-    const theme_arr = Themes();
-    const COLOR_SCHEME = theme_arr[themeObj[class_name]];
+    const COLOR_SCHEME = Themes[themeObj[class_name]];
     const accordianTheme = createMuiTheme({
         overrides: {
             MuiButtonBase: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.palette.primary.main,
+                    backgroundColor: COLOR_SCHEME.main,
                 }
             }
         },
@@ -39,8 +38,6 @@ export default function TypeAccordian({ display_type, display_object, class_name
 
     return (
         <ThemeProvider theme={accordianTheme}>
-
-        
         <Grid item xs = {12}>
             <Accordian
             defaultExpanded={true}>
