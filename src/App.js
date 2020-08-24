@@ -8,6 +8,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
 import ScheduledClasses from './ScheduledClasses/ScheduledClasses';
+import Calendar from './Calendar/Calendar';
 import { store } from './Store';
 
 const theme = createMuiTheme({
@@ -53,9 +54,7 @@ function App(){
                 <ScheduledClasses/>
               </Grid>
               <Grid item xs = {7}>
-                <Typography>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Varius sit amet mattis vulputate enim nulla aliquet porttitor lacus. Sed ullamcorper morbi tincidunt ornare massa eget egestas. Fringilla ut morbi tincidunt augue interdum velit. Nunc id cursus metus aliquam. Quisque id diam vel quam elementum pulvinar etiam. Nunc id cursus metus aliquam eleifend. Ipsum consequat nisl vel pretium lectus quam. Ut tellus elementum sagittis vitae et leo duis ut. Etiam dignissim diam quis enim lobortis scelerisque fermentum dui. Enim ut tellus elementum sagittis vitae et leo. Viverra orci sagittis eu volutpat odio facilisis mauris. Ut eu sem integer vitae. Mauris pharetra et ultrices neque ornare. At ultrices mi tempus imperdiet nulla. Augue mauris augue neque gravida in. Euismod nisi porta lorem mollis aliquam ut porttitor. Risus feugiat in ante metus dictum at tempor
-                </Typography>
+                <Calendar/>
               </Grid>
             </Grid>
           </Grid>

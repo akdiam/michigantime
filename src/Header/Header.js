@@ -6,7 +6,7 @@ export default function Header() {
     
     return (
         <div className="header">
-            <AppBar position="static" style={{height:"4vh"}}>
+            <AppBar position="static" style={{height:"4vh"}} variant="primary">
                 asdasd
             </AppBar>
         </div>

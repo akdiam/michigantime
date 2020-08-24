@@ -1,0 +1,88 @@
+.calContainer{
+    flex: 1;
+    position: relative;
+    height: 85vh;
+    top:15px;
+    border-bottom: 1px solid #666666;
+    border-right: 1px solid #666666;
+    max-width: 96%;
+    left:40px;
+
+    .times{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: -80px;
+        right: 0;
+        display: flex;
+        flex-direction: column;
+
+        .time {
+            position: relative;
+            flex: 1;
+            margin-top: -0.5em;
+
+            .label {
+                display: block;
+                width: 80px;
+                padding-right: 8px;
+                font-size: .8em;
+                font-weight: bold;
+                text-align: right;
+             }
+
+             &:after {
+                content: '';
+                position: absolute;
+                left: 80px;
+                right: 0;
+                top: 0.5em;
+                height: 1px;
+                background-color: #666666;
+            }
+        }
+    }
+
+    .days{
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: -25px;
+        bottom: 0;
+        display: flex;
+        float: left;
+        text-align: center;
+
+        .day{
+            position: relative;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+
+            .label{
+                height:25px;
+                font-weight: bold;
+                font-size: 1em; 
+            }
+
+            &:after {
+                content: '';
+                position: absolute;
+                top: 25px;
+                bottom: 0;
+                width: 1px;
+                background-color: #666666;
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+
+
