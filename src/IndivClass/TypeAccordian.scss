@@ -1,0 +1,48 @@
+.root {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 5px;
+}
+
+.top {
+    display: flex;
+    padding-left: 12px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+    flex-direction: row;
+}
+
+.bottom {
+    display: flex;
+    padding-left: 12px;
+    padding-bottom: 5px;
+    padding-top: 0px;
+}
+
+.rightb {
+    padding-right: 12px;
+    min-width: 8em;
+}
+
+.leftb {
+    flex: 1 1;
+    margin-right: 8px;
+}
+
+.leftt{
+    flex: 1 1;
+    margin-right: 10px;
+}
+
+.rightt{
+    padding-right: 12px;
+    min-width: 2em;
+}
+
+.root:hover{
+    cursor: pointer;
+    .icon{
+        color:#707070;
+    }
+}

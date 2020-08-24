@@ -59,7 +59,16 @@ export default function ClassList({ current_subj, onBack }) {
         return obj;
     };
 
-    const { addClass, addTitle } = store();
+    const { addClass, addTitle, addThemeToObj, availableThemeIndeces, classTitles } = store();
+    let real_filtered = filtered_classes.filter(subj => {
+        let class_name = current_subj+subj['Catalog Nbr'];
+        if (class_name in classTitles) {
+            return false;
+        }
+        else {
+            return true;
+        }
+    })
 
     return (
         <div className="classlist">
@@ -75,11 +84,11 @@ export default function ClassList({ current_subj, onBack }) {
                 </Grid>
                 <Grid item xs = {12}> 
                     <InfiniteScroll
-                    dataLength={filtered_classes.length}
+                    dataLength={real_filtered.length}
                     hasMore={false}
                     height={"86vh"}
                     >
-                        {filtered_classes.map((indiv_class, index) => {
+                        {real_filtered.map((indiv_class, index) => {
                             return (
                                 <Paper variant="outlined" style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden", height:"50px"}} key={index}>
                                     <Button
@@ -94,6 +103,10 @@ export default function ClassList({ current_subj, onBack }) {
                                         const class_title = indiv_class['Course Title'];
                                         addClass(class_to_add, class_name);
                                         addTitle(class_title, class_name);
+                                        let filtered_theme_indeces = availableThemeIndeces;
+                                        let index = filtered_theme_indeces[0];
+                                        filtered_theme_indeces.shift();
+                                        addThemeToObj(class_name, filtered_theme_indeces, index);
                                     }}
                                     >
                                         <ThemeProvider theme={theme}>

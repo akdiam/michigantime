@@ -13,10 +13,10 @@ export default function ScheduledClasses() {
                 <div className="scroller">
                 {keys.reverse().map((item, index) => {
                     return (
-                        <Grid container spacing={0} direction="column" key={index}>
+                        <Grid container spacing={0} direction="column" key={item}>
                             <IndivClass
                             class_name={item}
-                            key={index}
+                            key={item}
                             />
                         </Grid>
                     )

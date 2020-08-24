@@ -55,6 +55,23 @@ export function FormatClass( raw_section_info ) {
         })
     }
 
+    const formatTimeString = rawTime => {
+        if (!rawTime) {
+            return 'ARR';
+        }
+
+        const start = rawTime['start_obj'];
+        const end = rawTime['end_obj'];
+
+
+        let start_string = start['hour'] > 12 ? start['hour'] - 12 : start['hour'];
+        let end_string = end['hour'] > 12 ? end['hour'] - 12 : end['hour'];
+        
+        start_string += `:${start['min'] === 0 ? '00' : start['min']}`;
+        end_string += `:${end['min'] === 0 ? '00' : end['min']}${end['hour'] < 12 ? ' a' : ' p'}m`;
+        return `${start_string} - ${end_string}`;
+    }   
+
     const formatDaysArr = rawInfo => {
         let days_arr = [];
 
@@ -82,6 +99,9 @@ export function FormatClass( raw_section_info ) {
         for (let i = 0; i < daysArr.length; ++i) {
             daysString += daysArr[i];
         }
+        if (daysString === '') {
+            daysString = "ARR";
+        }
         return daysString;
     }
         
@@ -90,6 +110,7 @@ export function FormatClass( raw_section_info ) {
     for (let i = 0; i < raw_section_info.length; ++i) {
         let indiv_formatted_info = {};
         indiv_formatted_info['Time'] = formatTime(raw_section_info[i]['Time']);
+        indiv_formatted_info['TimeString'] = formatTimeString(indiv_formatted_info['Time']);
         indiv_formatted_info['DaysArr'] = formatDaysArr(raw_section_info[i]);
         indiv_formatted_info['DaysString'] = formatDaysString(indiv_formatted_info['DaysArr']);
         indiv_formatted_info['Instructor'] = raw_section_info[i]['Instructor'];
