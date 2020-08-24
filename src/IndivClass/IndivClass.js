@@ -50,15 +50,21 @@ export default function IndivClass({ class_name }) {
     const delClass = () => {
         let temp_classes = scheduledClasses;
         delete temp_classes[class_name];
-        removeClass(temp_classes);
+        removeClass(temp_classes);  
+    }
+
+    const handleChange = () => {
+        let new_expanded = !isExpanded;
+        changeExpansion(new_expanded);
     }
 
     return (
         <div className="parent">
-            {isExpanded ? 
             <Grid item xs = {12}>
                 <Accordian
-                defaultExpanded={true}>
+                defaultExpanded={true}
+                expanded={isExpanded}
+                onChange={handleChange}>
                     <AccordianSummary
                     expandIcon={<ExpandMoreIcon/>}
                     >   
@@ -88,7 +94,8 @@ export default function IndivClass({ class_name }) {
                             return (
                                 <TypeAccordian
                                 display_type={item}
-                                display_object={dispObj[item]}/>
+                                display_object={dispObj[item]}
+                                key={index}/>
                             )
                         }) : 
                         <Grid item xs = {12}>
@@ -97,8 +104,6 @@ export default function IndivClass({ class_name }) {
                     </AccordianDetails>
                 </Accordian>
             </Grid>
-            :
-            <div>{class_name}: {title}</div>}
         </div>
     )
 }

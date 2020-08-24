@@ -117,8 +117,6 @@ export default function ClassList({ current_subj, onBack }) {
                     </InfiniteScroll>
                 </Grid>
             </Grid>
-
-            
         </div>
     )
 }

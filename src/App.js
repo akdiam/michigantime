@@ -27,7 +27,6 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
-  const { init } = store();
 
   return (
     <div className="container">

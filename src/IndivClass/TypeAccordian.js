@@ -22,7 +22,7 @@ export default function TypeAccordian({ display_type, display_object }) {
                     <Grid container spacing={0} direction="column">
                         {display_object.map((item, index) => {
                             return (
-                                <Grid item xs = {12}>
+                                <Grid item xs = {12} key={index}>
                                     <Typography>
                                         {item['Section']} {item['DaysString']}
                                     </Typography>
