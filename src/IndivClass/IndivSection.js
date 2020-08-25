@@ -42,7 +42,7 @@ export const IndivSection = React.memo(({ item, class_name, display_type, addPin
     }
 
     return (
-        <Card elevation ={0} className="root" onClick={handleClick}>
+        <Card elevation={0} className="root" onClick={handleClick}>
             <div className="top">
                 <div className="leftt">
                     <ThemeProvider theme={theme}>
