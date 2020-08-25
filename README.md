@@ -1,3 +1,3 @@
-<img width="1679" alt="Screen Shot 2020-08-24 at 4 00 25 AM" src="https://user-images.githubusercontent.com/56457896/91019076-72281d80-e5be-11ea-9164-e9965d50a84a.png">
+![Screen Shot 2020-08-25 at 1 35 04 AM](https://user-images.githubusercontent.com/56457896/91126984-4450e080-e673-11ea-874e-204bea6ff84a.png)
 
 Revamped UI and UX for umscheduler... in progress
