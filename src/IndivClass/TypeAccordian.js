@@ -33,7 +33,7 @@ const theme = createMuiTheme({
     },
 });*/
 
-export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme }) => {
+export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme, addPin, removePin }) => {
     //const { themeObj } = store();
     const COLOR_SCHEME = colorScheme;
     
@@ -41,7 +41,15 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
         overrides: {
             MuiButtonBase: {
                 root: {
+                    backgroundColor: COLOR_SCHEME.main,
+                    color: COLOR_SCHEME.text,
+                }
+            }, 
+
+            MuiPaper: {
+                root: {
                     backgroundColor: COLOR_SCHEME.light,
+                    color:COLOR_SCHEME.text,
                 }
             }
         },
@@ -51,6 +59,7 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
         <Grid item xs = {12}>
             <ThemeProvider theme={accordianTheme}>
             <Accordian
+            square
             defaultExpanded={true}>
                 <AccordianSummary
                 expandIcon={<ExpandMoreIcon/>}
@@ -68,7 +77,9 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
                                     item={item}
                                     class_name={class_name}
                                     key={item}
-                                    color_scheme={COLOR_SCHEME}/>
+                                    display_type={display_type}
+                                    addPin={addPin}
+                                    removePin={removePin}/>
                                 </Grid>
                             )
                         })}

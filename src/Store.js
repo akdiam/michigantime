@@ -5,6 +5,7 @@ export const store = create(set => ({
     scheduledClasses: {},
     classTitles: {},
     themeObj: {},
+    pinnedClasses: {},
     availableThemeIndeces: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18],
     addClass: ( class_to_add, class_name ) => 
         set(state => ({
@@ -31,5 +32,17 @@ export const store = create(set => ({
         set(state => ({
             themeObj: {...state.themeObj, [class_name]: index},
             availableThemeIndeces: filtered_theme_indeces
-        }))
+        })),
+    addPin: ( class_name, added_pinned ) =>
+        set(state => {
+            state.pinnedClasses[class_name] = added_pinned;
+        }),
+    removePin: ( class_name, removed_pinned ) =>
+        set(state => {
+            state.pinnedClasses[class_name] = removed_pinned
+        }),
+    removeClassFromPinned: ( class_name ) => 
+        set(state => ({
+            pinnedClasses: omit(state.pinnedClasses, [class_name])
+        })),
 }))

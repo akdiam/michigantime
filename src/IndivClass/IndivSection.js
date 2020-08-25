@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 import Card from '@material-ui/core/Card';
 import Typography from '@material-ui/core/Typography';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
@@ -21,27 +21,28 @@ const theme = createMuiTheme({
     }
 });
 
-export const IndivSection = React.memo(({ item, class_name, color_scheme }) => {
+export const IndivSection = React.memo(({ item, class_name, display_type, addPin, removePin }) => {
     const [isActive, toggleActive] = useState(false);
+    let pinned = store(useCallback(state => state.pinnedClasses[class_name], [class_name]));
 
-    //const { themeObj } = store();
-    const COLOR_SCHEME = color_scheme;
-    /*const paperTheme = createMuiTheme({
-        overrides: {
-            MuiPaper: {
-                root: {
-                    backgroundColor: COLOR_SCHEME.light,
-                }
-            }
-        },
-    });*/
-
+    if (!pinned) {
+        pinned = {};
+    }
     const handleClick = () => {
+        if (!isActive) {
+            pinned[display_type] ? pinned[display_type].push(item) : pinned[display_type] = [item];
+            addPin(class_name, pinned);
+        }
+        else {
+            const index = pinned[display_type].indexOf(item);
+            pinned[display_type].length === 1 ? delete pinned[display_type] : pinned[display_type].splice(index, 1);
+            removePin(class_name, pinned);
+        }
         toggleActive(!isActive);
     }
 
     return (
-        <Card className="root" onClick={handleClick}>
+        <Card elevation ={0} className="root" onClick={handleClick}>
             <div className="top">
                 <div className="leftt">
                     <ThemeProvider theme={theme}>

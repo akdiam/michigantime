@@ -25,12 +25,12 @@ export default function ClassList({ onSelection }) {
             >
                 {ClassNames.map((indiv_class, index) => {
                     return (
-                    <Paper variant="outlined" style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden"}} key={index}>
+                    <Paper elevation={0} style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden"}} key={index}>
                         <Button
                         variant="contained"
+                        color="secondary"
                         fullWidth
                         size="large"
-                        color="secondary"
                         style={{height:"100%", padding:-5}}
                         onClick={() => {
                                 onSelection(indiv_class);

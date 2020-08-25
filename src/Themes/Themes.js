@@ -2,29 +2,31 @@ import React from 'react';
 import { createMuiTheme } from '@material-ui/core/styles';
 
 // 200 400 700
-// red
-
 export const Themes = [
+    // red
     {
-        light: '#EF9A9A',
-        main: '#EF5350',
-        dark: '#D32F2F',
+        light: '#EF5350',
+        main: '#E53935',
+        dark: '#C62828',
+        text: '#FFFFFF'
     },
         
     
     // pink
     {
-        light: '#F48FB1',
-        main: '#EC407A',
-        dark: '#C2185B',
+        light: '#EC407A',
+        main: '#D81B60',
+        dark: '#AD1457',
+        text: '#FFFFFF'
     },
         
     
     // purple
     {
-        light: '#CE93D8',
-        main: '#AB47BC',
+        light: '#BA68C8',
+        main: '#9C27B0',
         dark: '#7B1FA2',
+        text: '#FFFFFF'
     },
         
     
@@ -33,6 +35,7 @@ export const Themes = [
         light: '#9575CD',
         main: '#673AB7',
         dark: '#4527A0',
+        text: '#FFFFFF'
     },
     
     // indigo
@@ -40,6 +43,7 @@ export const Themes = [
         light: '#7986CB',
         main: '#3F51B5',
         dark: '#283593',
+        text: '#FFFFFF'
     },
     
     // blue
@@ -47,14 +51,16 @@ export const Themes = [
         light: '#E3F2FD',
         main: '#90CAF9',
         dark: '#2196F3',
+        text: '#000000'
     },
         
     
     // light blue
     {
-        light: '#2196F3',
-        main: '#0277BD',
-        dark: '#01579B',
+        light: '#80D8FF',
+        main: '#40C4FF',
+        dark: '#00B0FF',
+        text: '#000000'
     },
     
     // cyan
@@ -62,6 +68,7 @@ export const Themes = [
         light: '#80DEEA',
         main: '#26C6DA',
         dark: '#00ACC1',
+        text: '#000000'
     },
     
     // teal
@@ -69,6 +76,7 @@ export const Themes = [
         light: '#009688',
         main: '#00796B',
         dark: '#004D40',
+        text: '#FFFFFF'
     },
     
     // green
@@ -76,6 +84,7 @@ export const Themes = [
         light: '#C8E6C9',
         main: '#81C784',
         dark: '#4CAF50',
+        text: '#000000'
     },
     
     // light green
@@ -83,6 +92,7 @@ export const Themes = [
         light: '#C5E1A5',
         main: '#9CCC65',
         dark: '#689F38',
+        text: '#000000'
     },
     
     // lime 
@@ -90,6 +100,7 @@ export const Themes = [
         light: '#E6EE9C',
         main: '#D4E157',
         dark: '#AFB42B',
+        text: '#000000'
     },
     
     // yellow 
@@ -97,6 +108,7 @@ export const Themes = [
         light: '#FFF59D',
         main: '#FFEE58',
         dark: '#FBC02D',
+        text: '#000000'
     },
 
     // amber
@@ -104,6 +116,7 @@ export const Themes = [
         light: '#FFF8E1',
         main: '#FFE082',
         dark: '#FFC107',
+        text: '#000000'
     },
     
     // orange
@@ -111,6 +124,7 @@ export const Themes = [
         light: '#FFD180',
         main: '#FFAB40',
         dark: '#FF9100',
+        text: '#000000'
     },
     
     // deep orange
@@ -118,6 +132,7 @@ export const Themes = [
         light: '#FFCCBC',
         main: '#FF8A65',
         dark: '#FF5722',
+        text: '#000000'
     },
     
     // brown 
@@ -125,6 +140,7 @@ export const Themes = [
         light: '#A1887F',
         main: '#795548',
         dark: '#5D4037',
+        text: '#FFFFFF'
     },
     
     // grey
@@ -132,6 +148,7 @@ export const Themes = [
         light: '#EEEEEE',
         main: '#BDBDBD',
         dark: '#9E9E9E',
+        text: '#000000'
     },
     
     // blue grey
@@ -139,6 +156,7 @@ export const Themes = [
         light: '#78909C',
         main: '#546E7A',
         dark: '#37474F',
+        text: '#FFFFFF'
     },
 ]
 

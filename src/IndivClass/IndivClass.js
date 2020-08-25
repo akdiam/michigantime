@@ -9,6 +9,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { TypeAccordian } from './TypeAccordian';
 import DeleteIcon from '@material-ui/icons/Delete';
+import VpnLockIcon from '@material-ui/icons/VpnLock';
 import IconButton from '@material-ui/core/IconButton';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { Themes } from '../Themes/Themes';
@@ -23,15 +24,11 @@ const theme = createMuiTheme({
     }
 });
 
-export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, removeTitle }) => {
-    //const { scheduledClasses, classTitles, removeClass, themeObj, removeThemeFromObj, removeTitle } = store();
-    //const { removeClass, removeThemeFromObj, removeTitle } = store();
+export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned }) => {
     console.log('render')
-    //const removeClass = store(removeclass)
     const classObj = indiv_scheduled_class;
     const keys = Object.keys(classObj);
     const title = indiv_class_title;
-    //const [isExpanded, changeExpansion] = useState(true);
 
     const COLOR_SCHEME = Themes[indiv_theme];
     const accordianTheme = createMuiTheme({
@@ -43,28 +40,13 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
             },
             MuiButtonBase: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.main,
+                    backgroundColor: COLOR_SCHEME.dark,
+                    color: COLOR_SCHEME.text,
                 }
             }
         },
     });
 
-    /*const updateDisplays = () => {
-        let dispObj = {};
-        for (let key in keys) {
-            switch (keys[key]) {
-                case 'LEC': dispObj['Lectures'] = FormatClass(classObj[keys[key]]); break;
-                case 'DIS': dispObj['Discussions'] = FormatClass(classObj[keys[key]]); break;
-                case 'LAB': dispObj['Labs'] = FormatClass(classObj[keys[key]]); break;
-                case 'SEM': dispObj['Seminars'] = FormatClass(classObj[keys[key]]); break;
-                case 'REC': dispObj['Recitations'] = FormatClass(classObj[keys[key]]); break;
-            }
-        }
-        updateInfo(dispObj);
-        return dispObj;
-    }*/
-
-    //const dispObj = updateDisplays();
     let dispObj = {};
     for (let key in keys) {
         switch (keys[key]) {
@@ -84,25 +66,20 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
     const display_keys = Object.keys(dispObj);
 
     const delClass = event => {
-        /*let temp_classes = scheduledClasses;
-        delete temp_classes[class_name];*/
         removeClass(class_name);
-
-        /*let temp_obj = themeObj;
-        delete temp_obj[class_name];*/
-        //const index = themeObj[class_name];
         removeThemeFromObj( class_name );
-
-        /*let temp_titles = classTitles;
-        delete temp_titles[class_name];*/
         removeTitle(class_name);
+        removeClassFromPinned(class_name);
         event.stopPropagation();
     }
 
-    /*const handleChange = () => {
-        let new_expanded = !isExpanded;
-        changeExpansion(new_expanded);
-    }*/
+    const takeToAtlas = event => {
+        event.stopPropagation();
+        const num = class_name.match(/\d+/)[0].trim();
+        const subj = class_name.match(/[A-Z]+/)[0].trim();
+        const atlasURL = `https://atlas.ai.umich.edu/course/${subj}%20${num}/`;
+        window.open(atlasURL);
+    }
 
     return (
         <div className="parent">
@@ -128,6 +105,10 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                                 </Grid>
                             </Grid>
                         </ThemeProvider>
+                        <IconButton 
+                        onClick={takeToAtlas}>
+                            <VpnLockIcon/>
+                        </IconButton>
                         <IconButton
                         onClick={delClass}>
                             <DeleteIcon/>
@@ -143,7 +124,9 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                                 display_object={dispObj[item]}
                                 key={item}
                                 class_name={class_name}
-                                colorScheme={COLOR_SCHEME}/>
+                                colorScheme={COLOR_SCHEME}
+                                addPin={addPin}
+                                removePin={removePin}/>
                             )
                         }) : 
                         <Grid item xs = {12}>

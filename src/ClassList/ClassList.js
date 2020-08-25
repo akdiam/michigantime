@@ -85,11 +85,11 @@ export default function ClassList({ current_subj, onBack }) {
                     <InfiniteScroll
                     dataLength={real_filtered.length}
                     hasMore={false}
-                    height={"86vh"}
+                    height={"87vh"}
                     >
                         {real_filtered.map((indiv_class, index) => {
                             return (
-                                <Paper variant="outlined" style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden", height:"50px"}} key={index}>
+                                <Paper elevation={0} style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden", height:"50px"}} key={index}>
                                     <Button
                                     variant="contained"
                                     fullWidth
@@ -116,7 +116,7 @@ export default function ClassList({ current_subj, onBack }) {
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12}>
-                                                    <Typography variant="caption">
+                                                    <Typography variant="caption" noWrap="true">
                                                     {indiv_class['Course Title']}
                                                     </Typography>   
                                                 </Grid>
