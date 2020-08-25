@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import { FormatClass } from './FormatClass';
 import { store } from '../Store';
 import Accordian from '@material-ui/core/Accordion';
@@ -7,7 +7,7 @@ import AccordianDetails from '@material-ui/core/AccordionDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
-import TypeAccordian from './TypeAccordian';
+import { TypeAccordian } from './TypeAccordian';
 import DeleteIcon from '@material-ui/icons/Delete';
 import IconButton from '@material-ui/core/IconButton';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
@@ -23,15 +23,17 @@ const theme = createMuiTheme({
     }
 });
 
-export default function IndivClass({ class_name }) {
-    const { scheduledClasses, classTitles, removeClass, themeObj, removeThemeFromObj, removeTitle } = store();
-    const classObj = scheduledClasses[class_name];
+export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, removeTitle }) => {
+    //const { scheduledClasses, classTitles, removeClass, themeObj, removeThemeFromObj, removeTitle } = store();
+    //const { removeClass, removeThemeFromObj, removeTitle } = store();
+    console.log('render')
+    //const removeClass = store(removeclass)
+    const classObj = indiv_scheduled_class;
     const keys = Object.keys(classObj);
-    const title = classTitles[class_name];
-    const [isExpanded, changeExpansion] = useState(true);
-    const COLOR_SCHEME = Themes[themeObj[class_name]];
-    console.log(COLOR_SCHEME);
+    const title = indiv_class_title;
+    //const [isExpanded, changeExpansion] = useState(true);
 
+    const COLOR_SCHEME = Themes[indiv_theme];
     const accordianTheme = createMuiTheme({
         overrides: {
             MuiAccordionDetails: {
@@ -41,12 +43,28 @@ export default function IndivClass({ class_name }) {
             },
             MuiButtonBase: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.dark,
+                    backgroundColor: COLOR_SCHEME.main,
                 }
             }
         },
     });
 
+    /*const updateDisplays = () => {
+        let dispObj = {};
+        for (let key in keys) {
+            switch (keys[key]) {
+                case 'LEC': dispObj['Lectures'] = FormatClass(classObj[keys[key]]); break;
+                case 'DIS': dispObj['Discussions'] = FormatClass(classObj[keys[key]]); break;
+                case 'LAB': dispObj['Labs'] = FormatClass(classObj[keys[key]]); break;
+                case 'SEM': dispObj['Seminars'] = FormatClass(classObj[keys[key]]); break;
+                case 'REC': dispObj['Recitations'] = FormatClass(classObj[keys[key]]); break;
+            }
+        }
+        updateInfo(dispObj);
+        return dispObj;
+    }*/
+
+    //const dispObj = updateDisplays();
     let dispObj = {};
     for (let key in keys) {
         switch (keys[key]) {
@@ -66,25 +84,25 @@ export default function IndivClass({ class_name }) {
     const display_keys = Object.keys(dispObj);
 
     const delClass = event => {
-        let temp_classes = scheduledClasses;
-        delete temp_classes[class_name];
-        removeClass(temp_classes);
+        /*let temp_classes = scheduledClasses;
+        delete temp_classes[class_name];*/
+        removeClass(class_name);
 
-        let temp_obj = themeObj;
-        const index = temp_obj[class_name];
-        delete temp_obj[class_name];
-        removeThemeFromObj(temp_obj, index);
+        /*let temp_obj = themeObj;
+        delete temp_obj[class_name];*/
+        //const index = themeObj[class_name];
+        removeThemeFromObj( class_name );
 
-        let temp_titles = classTitles;
-        delete temp_titles[class_name];
-        removeTitle(temp_titles);
+        /*let temp_titles = classTitles;
+        delete temp_titles[class_name];*/
+        removeTitle(class_name);
         event.stopPropagation();
     }
 
-    const handleChange = () => {
+    /*const handleChange = () => {
         let new_expanded = !isExpanded;
         changeExpansion(new_expanded);
-    }
+    }*/
 
     return (
         <div className="parent">
@@ -92,8 +110,6 @@ export default function IndivClass({ class_name }) {
             <Grid item xs = {12}>
                 <Accordian
                 defaultExpanded={true}
-                expanded={isExpanded}
-                onChange={handleChange}
                 >
                     <AccordianSummary
                     expandIcon={<ExpandMoreIcon/>}
@@ -125,8 +141,9 @@ export default function IndivClass({ class_name }) {
                                 <TypeAccordian
                                 display_type={item}
                                 display_object={dispObj[item]}
-                                key={index}
-                                class_name={class_name}/>
+                                key={item}
+                                class_name={class_name}
+                                colorScheme={COLOR_SCHEME}/>
                             )
                         }) : 
                         <Grid item xs = {12}>
@@ -138,4 +155,4 @@ export default function IndivClass({ class_name }) {
             </ThemeProvider>
         </div>
     )
-}
+})

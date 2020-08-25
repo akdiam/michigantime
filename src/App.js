@@ -7,7 +7,7 @@ import Paper from '@material-ui/core/Paper'
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
-import ScheduledClasses from './ScheduledClasses/ScheduledClasses';
+import { ScheduledClasses } from './ScheduledClasses/ScheduledClasses';
 import Calendar from './Calendar/Calendar';
 import { store } from './Store';
 
@@ -28,6 +28,7 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
+  const { scheduledClasses } = store();
 
   return (
     <div className="container">

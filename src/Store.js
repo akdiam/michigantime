@@ -1,4 +1,5 @@
 import create from 'zustand';
+import omit from "lodash-es/omit";
 
 export const store = create(set => ({
     scheduledClasses: {},
@@ -13,18 +14,18 @@ export const store = create(set => ({
         set(state => ({
             classTitles: {...state.classTitles, [class_name]: class_title}
         })),
-    removeTitle: ( new_class_titles ) => 
+    removeTitle: ( class_name ) => 
         set(state => ({
-            classTitles: new_class_titles
+            classTitles: omit(state.classTitles, [class_name])
         })),
-    removeClass: ( filtered_scheduled ) => 
+    removeClass: ( class_name ) => 
         set(state => ({
-            scheduledClasses: filtered_scheduled
+            scheduledClasses: omit(state.scheduledClasses, [class_name])
         })),
-    removeThemeFromObj: ( filtered_obj, index ) => 
+    removeThemeFromObj: ( class_name, index ) => 
         set(state => ({
-            themeObj: filtered_obj,
-            availableThemeIndeces: [...state.availableThemeIndeces, index]
+            availableThemeIndeces: [...state.availableThemeIndeces, state.themeObj[class_name]],
+            themeObj: omit(state.themeObj, [class_name]),
         })),
     addThemeToObj: ( class_name, filtered_theme_indeces, index ) => 
         set(state => ({

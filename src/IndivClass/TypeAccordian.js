@@ -7,7 +7,7 @@ import { Typography } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core';
 import { Themes } from '../Themes/Themes';
-import IndivSection from './IndivSection'; 
+import { IndivSection } from './IndivSection'; 
 import { store } from '../Store';
 
 const theme = createMuiTheme({
@@ -23,22 +23,33 @@ const theme = createMuiTheme({
     },
 });
 
-export default function TypeAccordian({ display_type, display_object, class_name }) {
-    const { themeObj } = store();
-    const COLOR_SCHEME = Themes[themeObj[class_name]];
+/*const accordianTheme = createMuiTheme({
+    overrides: {
+        MuiButtonBase: {
+            root: {
+                backgroundColor: '#a8a8a8',
+            }
+        }
+    },
+});*/
+
+export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme }) => {
+    //const { themeObj } = store();
+    const COLOR_SCHEME = colorScheme;
+    
     const accordianTheme = createMuiTheme({
         overrides: {
             MuiButtonBase: {
                 root: {
-                    backgroundColor: COLOR_SCHEME.main,
+                    backgroundColor: COLOR_SCHEME.light,
                 }
             }
         },
     });
 
     return (
-        <ThemeProvider theme={accordianTheme}>
         <Grid item xs = {12}>
+            <ThemeProvider theme={accordianTheme}>
             <Accordian
             defaultExpanded={true}>
                 <AccordianSummary
@@ -55,15 +66,16 @@ export default function TypeAccordian({ display_type, display_object, class_name
                                 <Grid item xs = {12} key={index}>
                                     <IndivSection
                                     item={item}
-                                    class_name={class_name}/>
+                                    class_name={class_name}
+                                    key={item}
+                                    color_scheme={COLOR_SCHEME}/>
                                 </Grid>
                             )
                         })}
                     </Grid>
                 </AccordianDetails>
             </Accordian>
+            </ThemeProvider>
         </Grid>
-
-        </ThemeProvider>
     )
-}
+})

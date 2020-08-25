@@ -21,12 +21,12 @@ const theme = createMuiTheme({
     }
 });
 
-export default function IndivSection({ item, class_name }) {
+export const IndivSection = React.memo(({ item, class_name, color_scheme }) => {
     const [isActive, toggleActive] = useState(false);
 
-    const { themeObj } = store();
-    const COLOR_SCHEME = Themes[themeObj[class_name]];
-    const paperTheme = createMuiTheme({
+    //const { themeObj } = store();
+    const COLOR_SCHEME = color_scheme;
+    /*const paperTheme = createMuiTheme({
         overrides: {
             MuiPaper: {
                 root: {
@@ -34,15 +34,13 @@ export default function IndivSection({ item, class_name }) {
                 }
             }
         },
-    });
+    });*/
 
     const handleClick = () => {
         toggleActive(!isActive);
-        console.log('clicked');
     }
 
     return (
-        <ThemeProvider theme={paperTheme}>
         <Card className="root" onClick={handleClick}>
             <div className="top">
                 <div className="leftt">
@@ -53,7 +51,7 @@ export default function IndivSection({ item, class_name }) {
                     </ThemeProvider>
                 </div>
                 <div className="rightt">
-                    {!isActive ? <AddIcon className="icon"/> : <RemoveIcon className="icon"/>}
+                    {!isActive ? <AddIcon className="add"/> : <RemoveIcon className="rem"/>}
                 </div>
             </div>
             <div className="bottom">
@@ -67,6 +65,5 @@ export default function IndivSection({ item, class_name }) {
                 </ThemeProvider>
             </div>
         </Card>
-        </ThemeProvider>
     )
-}
+})

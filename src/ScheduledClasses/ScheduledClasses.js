@@ -1,11 +1,12 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import { store } from '../Store';
-import IndivClass from '../IndivClass/IndivClass';
+import { IndivClass } from '../IndivClass/IndivClass';
 import Grid from '@material-ui/core/Grid';
 
-export default function ScheduledClasses() {
-    const { scheduledClasses } = store();
+export const ScheduledClasses = React.memo(() => {
+    const { scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, removeTitle } = store();
+    //const removeClass = state => state.removeClass;
     let keys = Object.keys(scheduledClasses);
     return (
         <div className="parent">
@@ -17,6 +18,12 @@ export default function ScheduledClasses() {
                             <IndivClass
                             class_name={item}
                             key={item}
+                            indiv_scheduled_class={scheduledClasses[item]}
+                            indiv_class_title={classTitles[item]}
+                            indiv_theme={themeObj[item]}
+                            removeClass={removeClass}
+                            removeThemeFromObj={removeThemeFromObj}
+                            removeTitle={removeTitle}
                             />
                         </Grid>
                     )
@@ -31,4 +38,4 @@ export default function ScheduledClasses() {
             }
         </div>
     )
-}
+})

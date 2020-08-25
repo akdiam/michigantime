@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import ClassListing from './FA2020';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from '@material-ui/core/Button';
@@ -77,7 +77,6 @@ export default function ClassList({ current_subj, onBack }) {
                     <Button
                     variant="contained"
                     size="large"
-                    color="warning"
                     onClick={() => onBack()}>
                         Back to Subjects
                     </Button>
