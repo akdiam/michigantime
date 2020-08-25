@@ -25,7 +25,6 @@ const theme = createMuiTheme({
 });
 
 export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned }) => {
-    console.log('render')
     const classObj = indiv_scheduled_class;
     const keys = Object.keys(classObj);
     const title = indiv_class_title;
@@ -50,11 +49,11 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
     let dispObj = {};
     for (let key in keys) {
         switch (keys[key]) {
-            case 'LEC': dispObj['Lectures'] = FormatClass(classObj[keys[key]]); break;
-            case 'DIS': dispObj['Discussions'] = FormatClass(classObj[keys[key]]); break;
-            case 'LAB': dispObj['Labs'] = FormatClass(classObj[keys[key]]); break;
-            case 'SEM': dispObj['Seminars'] = FormatClass(classObj[keys[key]]); break;
-            case 'REC': dispObj['Recitations'] = FormatClass(classObj[keys[key]]); break;
+            case 'LEC': dispObj['Lectures'] = FormatClass(classObj[keys[key]], class_name); break;
+            case 'DIS': dispObj['Discussions'] = FormatClass(classObj[keys[key]], class_name); break;
+            case 'LAB': dispObj['Labs'] = FormatClass(classObj[keys[key]], class_name); break;
+            case 'SEM': dispObj['Seminars'] = FormatClass(classObj[keys[key]], class_name); break;
+            case 'REC': dispObj['Recitations'] = FormatClass(classObj[keys[key]], class_name); break;
         }
     }
 
@@ -92,7 +91,7 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                     expandIcon={<ExpandMoreIcon/>}
                     >   
                         <ThemeProvider theme={theme}>
-                            <Grid container spacing={0} direction="column">
+                            <Grid container spacing={0} direction="row">
                                 <Grid item xs={12}>
                                     <Typography variant="subtitle2">
                                     {class_name} 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Accordian from '@material-ui/core/Accordion';
 import AccordianSummary from '@material-ui/core/AccordionSummary';
 import AccordianDetails from '@material-ui/core/AccordionDetails';
@@ -35,10 +35,16 @@ const theme = createMuiTheme({
 
 export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme, addPin, removePin }) => {
     //const { themeObj } = store();
+    const [pinnedArr, changePinned] = useState(new Array(display_object.length).fill(false));
     const COLOR_SCHEME = colorScheme;
     
     const accordianTheme = createMuiTheme({
         overrides: {
+            MuiAccordionDetails: {
+                root: {
+                    padding: '0px 0px 0px',
+                },
+            },
             MuiButtonBase: {
                 root: {
                     backgroundColor: COLOR_SCHEME.main,
@@ -54,6 +60,12 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
             }
         },
     });
+    
+    
+    const updatePinned = (new_pinned) => {
+        console.log(new_pinned);
+        changePinned(new_pinned);
+    }
 
     return (
         <Grid item xs = {12}>
@@ -69,17 +81,20 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
                 </ThemeProvider>
                 </AccordianSummary>
                 <AccordianDetails>
-                    <Grid container spacing={0} direction="column">
+                    <Grid container spacing={0} direction="row">
                         {display_object.map((item, index) => {
                             return (
                                 <Grid item xs = {12} key={index}>
                                     <IndivSection
                                     item={item}
                                     class_name={class_name}
-                                    key={item}
+                                    key={index}
                                     display_type={display_type}
                                     addPin={addPin}
-                                    removePin={removePin}/>
+                                    removePin={removePin}
+                                    pinnedArr={pinnedArr}
+                                    updatePinned={updatePinned}
+                                    index={index}/>
                                 </Grid>
                             )
                         })}

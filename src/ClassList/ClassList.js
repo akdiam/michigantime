@@ -95,7 +95,7 @@ export default function ClassList({ current_subj, onBack }) {
                                     fullWidth
                                     size="large"
                                     color="secondary"
-                                    style={{height:"100%", padding:-5}}
+                                    style={{height:"100%", padding:0}}
                                     onClick={() => {
                                         const class_to_add = gatherAllClasses(indiv_class['Catalog Nbr']);
                                         const class_name = current_subj+indiv_class['Catalog Nbr'];

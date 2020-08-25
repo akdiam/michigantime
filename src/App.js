@@ -8,7 +8,7 @@ import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
 import { ScheduledClasses } from './ScheduledClasses/ScheduledClasses';
-import Calendar from './Calendar/Calendar';
+import { Calendar } from './Calendar/Calendar';
 import { store } from './Store';
 
 const theme = createMuiTheme({
@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
-  const { scheduledClasses } = store();
+  const { pinnedClasses, pinnedOnSchedule, updatePinnedSched } = store();
 
   return (
     <div className="container">
@@ -55,7 +55,10 @@ function App(){
                 <ScheduledClasses/>
               </Grid>
               <Grid item xs = {7}>
-                <Calendar/>
+                <Calendar
+                pinned_classes={pinnedClasses}
+                pinned_on_schedule={pinnedOnSchedule}
+                update_pinned_sched={updatePinnedSched}/>
               </Grid>
             </Grid>
           </Grid>

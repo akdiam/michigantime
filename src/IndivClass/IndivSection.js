@@ -21,28 +21,33 @@ const theme = createMuiTheme({
     }
 });
 
-export const IndivSection = React.memo(({ item, class_name, display_type, addPin, removePin }) => {
-    const [isActive, toggleActive] = useState(false);
+export const IndivSection = React.memo(({ item, class_name, display_type, addPin, removePin, pinnedArr, updatePinned, index }) => {
+    console.log(`${class_name} rendered`)
     let pinned = store(useCallback(state => state.pinnedClasses[class_name], [class_name]));
-
     if (!pinned) {
         pinned = {};
     }
     const handleClick = () => {
-        if (!isActive) {
-            pinned[display_type] ? pinned[display_type].push(item) : pinned[display_type] = [item];
+        let new_pinned = [...pinnedArr];
+        new_pinned.fill(false);
+        if (pinnedArr[index] === false) {
+            pinned[display_type] = [item];
+            //all_pinned[class_name] = pinned;
+            console.log(pinnedArr[index])
+            new_pinned[index] = true;
             addPin(class_name, pinned);
+            updatePinned(new_pinned);
         }
         else {
-            const index = pinned[display_type].indexOf(item);
-            pinned[display_type].length === 1 ? delete pinned[display_type] : pinned[display_type].splice(index, 1);
+            delete pinned[display_type];
             removePin(class_name, pinned);
+            updatePinned(new_pinned);
         }
-        toggleActive(!isActive);
+        //toggleActive(!isActive);
     }
 
     return (
-        <Card elevation={0} className="root" onClick={handleClick}>
+        <Card elevation={6} raised className="root" onClick={handleClick}>
             <div className="top">
                 <div className="leftt">
                     <ThemeProvider theme={theme}>
@@ -52,7 +57,7 @@ export const IndivSection = React.memo(({ item, class_name, display_type, addPin
                     </ThemeProvider>
                 </div>
                 <div className="rightt">
-                    {!isActive ? <AddIcon className="add"/> : <RemoveIcon className="rem"/>}
+                    {pinnedArr[index]===false ? <AddIcon size="large" className="add"/> : <RemoveIcon className="rem"/>}
                 </div>
             </div>
             <div className="bottom">

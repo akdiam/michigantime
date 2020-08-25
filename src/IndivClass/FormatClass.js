@@ -1,4 +1,4 @@
-export function FormatClass( raw_section_info ) {
+export function FormatClass( raw_section_info, class_name ) {
     const formatTime = unformattedTime => {
         if (unformattedTime === "ARR") {
             return null
@@ -118,6 +118,8 @@ export function FormatClass( raw_section_info ) {
         indiv_formatted_info['Credits'] = parseInt(raw_section_info[i]['Units']);
         indiv_formatted_info['Section'] = raw_section_info[i]['Section'].trim();
         indiv_formatted_info['ID'] = parseInt(raw_section_info[i]['Class Nbr']);
+        indiv_formatted_info['ClassName'] = class_name;
+        indiv_formatted_info['Type'] = raw_section_info[i]['Component'];
         all_formatted_info.push(indiv_formatted_info);
     }
     return (all_formatted_info);

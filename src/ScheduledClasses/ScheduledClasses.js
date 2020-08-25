@@ -12,9 +12,9 @@ export const ScheduledClasses = React.memo(() => {
         <div className="parent">
             {keys.length !== 0 ? 
                 <div className="scroller">
-                {keys.reverse().map((item, index) => {
+                    <Grid container spacing={0} direction="column">
+                    {keys.reverse().map((item, index) => {
                     return (
-                        <Grid container spacing={0} direction="column" key={item}>
                             <IndivClass
                             class_name={item}
                             key={item}
@@ -28,9 +28,9 @@ export const ScheduledClasses = React.memo(() => {
                             removePin={removePin}
                             removeClassFromPinned={removeClassFromPinned}
                             />
-                        </Grid>
-                    )
-                })}
+                        )
+                    })}
+                </Grid>
                 </div>
                 :
                 <div className="warning-msg">
