@@ -98,7 +98,7 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                                     </Typography>
                                 </Grid>
                                 <Grid item xs={12}>
-                                    <Typography variant="caption">
+                                    <Typography variant="body1">
                                     {title}
                                     </Typography>   
                                 </Grid>

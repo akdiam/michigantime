@@ -1,6 +1,6 @@
 import create from 'zustand';
 import omit from "lodash-es/omit";
-import { remove } from 'lodash-es';
+import { checkConflict } from './checkConflict';
 
 export const store = create((set, get) => ({
     scheduledClasses: {},
@@ -35,10 +35,31 @@ export const store = create((set, get) => ({
             themeObj: {...state.themeObj, [class_name]: index},
             availableThemeIndeces: filtered_theme_indeces
         })),
-    addPin: ( class_name, added_pinned ) => {
-        set(state => {
-            state.pinnedClasses[class_name] = added_pinned;
-        })},
+    addPin: ( class_name, added_pinned, display_type ) => {
+        let pinned = get().pinnedClasses;
+        let pinned_on_schedule = [];
+        pinned[class_name] = added_pinned;
+        let has_conflict = false;
+
+        exit:
+        for (let classKey in pinned) {
+            for (let typeKey in pinned[classKey]) {
+                for (let i = 0; i < pinned[classKey][typeKey].length; ++i) {
+                    if (checkConflict(pinned[classKey][typeKey][i], pinned_on_schedule)) {
+                        has_conflict = true;
+                        break exit;
+                    }
+                    else {
+                        pinned_on_schedule.push(pinned[classKey][typeKey][i]);
+                    }
+                }
+            }
+        }
+        if (has_conflict) {pinned_on_schedule = [];}
+        set(state => ({
+            pinnedClasses: pinned,
+            pinnedOnSchedule: pinned_on_schedule
+        }))},
     removePin: ( class_name, removed_pinned ) => { 
         let pinned = get().pinnedClasses;
         if (Object.keys(removed_pinned).length === 0) {
@@ -46,8 +67,27 @@ export const store = create((set, get) => ({
         } else {
             pinned[class_name] = removed_pinned;
         }
+
+        let pinned_on_schedule = [];
+        let has_conflict = false;
+        exit:
+        for (let classKey in pinned) {
+            for (let typeKey in pinned[classKey]) {
+                for (let i = 0; i < pinned[classKey][typeKey].length; ++i) {
+                    if (checkConflict(pinned[classKey][typeKey][i], pinned_on_schedule)) {
+                        has_conflict = true;
+                        break exit;
+                    }
+                    else {
+                        pinned_on_schedule.push(pinned[classKey][typeKey][i]);
+                    }
+                }
+            }
+        }
+        if (has_conflict) {pinned_on_schedule = [];}
         set(state => ({
-            pinnedClasses: pinned
+            pinnedClasses: pinned,
+            pinnedOnSchedule: pinned_on_schedule
         }))},
     removeClassFromPinned: ( class_name ) =>   
         set(state => ({

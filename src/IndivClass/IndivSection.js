@@ -35,7 +35,7 @@ export const IndivSection = React.memo(({ item, class_name, display_type, addPin
             //all_pinned[class_name] = pinned;
             console.log(pinnedArr[index])
             new_pinned[index] = true;
-            addPin(class_name, pinned);
+            addPin(class_name, pinned, display_type);
             updatePinned(new_pinned);
         }
         else {

@@ -13,7 +13,7 @@ const days = ['M', 'T', 'W', 'R', 'F'];
 const start = 7;
 const end = 21;
 
-export const Calendar = React.memo(({ pinned_classes, pinned_on_schedule, update_pinned_sched }) => {
+export const Calendar = React.memo(({ pinned_classes, pinned_on_schedule }) => {
     const [currIndex, updateIndex] = useState(0);
     const createDispTime = time => {
         const hour = (time / 60) | 0;
@@ -23,7 +23,7 @@ export const Calendar = React.memo(({ pinned_classes, pinned_on_schedule, update
     let pinnedClasses = pinned_classes;
     let pinnedOnSchedule = pinned_on_schedule;
 
-    // calendar jsx and style borrowed from gtscheduler - thanks!
+    // most calendar jsx and style borrowed from gtscheduler - thanks!
     return (
         <Grid container spacing={1} direction="row" alignItems="center">
             <Grid item xs = {12} alignItems="stretch">

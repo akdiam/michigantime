@@ -23,16 +23,6 @@ const theme = createMuiTheme({
     },
 });
 
-/*const accordianTheme = createMuiTheme({
-    overrides: {
-        MuiButtonBase: {
-            root: {
-                backgroundColor: '#a8a8a8',
-            }
-        }
-    },
-});*/
-
 export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme, addPin, removePin }) => {
     //const { themeObj } = store();
     const [pinnedArr, changePinned] = useState(new Array(display_object.length).fill(false));
