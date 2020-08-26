@@ -21,7 +21,7 @@ export default function ClassList({ onSelection }) {
             <InfiniteScroll
             dataLength={ClassNames.length}
             hasMore={false}
-            height={"100vh"}
+            height={"92vh"}
             >
                 {ClassNames.map((indiv_class, index) => {
                     return (

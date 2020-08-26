@@ -50,7 +50,8 @@ export const store = create((set, get) => ({
                         break exit;
                     }
                     else {
-                        pinned_on_schedule.push(pinned[classKey][typeKey][i]);
+                        if (pinned[classKey][typeKey][i]['TimeString'] !== "ARR")
+                            pinned_on_schedule.push(pinned[classKey][typeKey][i]);
                     }
                 }
             }
@@ -79,7 +80,8 @@ export const store = create((set, get) => ({
                         break exit;
                     }
                     else {
-                        pinned_on_schedule.push(pinned[classKey][typeKey][i]);
+                        if (pinned[classKey][typeKey][i]['TimeString'] !== "ARR")
+                            pinned_on_schedule.push(pinned[classKey][typeKey][i]);
                     }
                 }
             }

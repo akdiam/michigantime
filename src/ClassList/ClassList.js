@@ -73,7 +73,7 @@ export default function ClassList({ current_subj, onBack }) {
     return (
         <div className="classlist">
             <Grid container spacing={2} direction="column">
-                <Grid item xs = {12} style={{alignItems:'center'}}>
+                <Grid container item xs = {12} justify='center'>
                     <Button
                     variant="contained"
                     size="large"

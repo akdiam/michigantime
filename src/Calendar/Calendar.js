@@ -7,7 +7,7 @@ import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
 import { Themes } from '../Themes/Themes';
-import CalSlots from '../CalSlots/CalSlots';
+import { CalSlots } from '../CalSlots/CalSlots';
 //import { updateAllSchedules } from './updateAllSchedules';
 import './Calendar.scss';
 

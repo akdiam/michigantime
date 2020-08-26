@@ -8,27 +8,27 @@ import './CalSlots.scss';
 const start = 6*60;
 const end = 21*60;
 
-const theme = createMuiTheme({
-    typography: {
-        subtitle2: {
-            fontSize:15,
-            fontWeight: 2000,
-        },
-        caption: {
-
-        }
-    }
-});
-
-export default function CalSlots( { class_to_map, class_name, theme_obj } ) {
+export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) => {
+    console.log(class_to_map);
     const COLOR_SCHEME = Themes[theme_obj[class_name]];
     console.log(COLOR_SCHEME);
     const day_arr = class_to_map['DaysArr'];
     const class_start = class_to_map['Time']['start_obj']['hour'] * 60 + class_to_map['Time']['start_obj']['min'];
     const class_end = class_to_map['Time']['end_obj']['hour'] * 60 + class_to_map['Time']['end_obj']['min'];
+    const theme = createMuiTheme({
+        typography: {
+            subtitle2: {
+                fontSize:15,
+                fontWeight: 2000,
+            },
+            allVariants: {
+                color:COLOR_SCHEME.text,
+            }
+        }
+    });
     return (
         <div className="slot_container">
-            {day_arr && day_arr.map(day => { 
+            {day_arr && class_start !== {} && day_arr.map(day => { 
                 return (<div className={'meeting '+day}
                     key={day}
                     style={{
@@ -61,4 +61,4 @@ export default function CalSlots( { class_to_map, class_name, theme_obj } ) {
             )}
         </div>
     )
-}
+})

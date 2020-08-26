@@ -3,6 +3,7 @@ import Typography from '@material-ui/core/Typography';
 import { store } from '../Store';
 import { IndivClass } from '../IndivClass/IndivClass';
 import Grid from '@material-ui/core/Grid';
+import './ScheduledClasses.css';
 
 export const ScheduledClasses = React.memo(() => {
     const { scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned } = store();

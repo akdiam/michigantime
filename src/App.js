@@ -15,7 +15,7 @@ const theme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main:"#4a71ff"
+      main:"#8a8a8a"
     },
     secondary: {
       main:"#2e2e2e"
@@ -31,7 +31,7 @@ function App(){
   const { pinnedOnSchedule, themeObj } = store();
 
   return (
-    <div className="container">
+    <div className="container" style={{height:"88vh"}}>
       <ThemeProvider theme={theme}>
         <Paper style={{height:"100vh"}}>
           <Grid container spacing={2} direction="column">
