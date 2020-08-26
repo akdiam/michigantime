@@ -63,7 +63,7 @@ export const IndivSection = React.memo(({ item, class_name, display_type, addPin
             <div className="bottom">
                 <ThemeProvider theme={theme}>
                     <Typography variant="subtitle2" className="leftb">
-                        {item['Location']} 
+                        {item['Location']}
                     </Typography> 
                     <Typography variant="subtitle2" className="rightb">
                         {item['DaysString']}   {item['TimeString']}

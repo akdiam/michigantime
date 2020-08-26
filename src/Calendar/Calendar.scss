@@ -1,12 +1,19 @@
 .calContainer{
     flex: 1;
     position: relative;
-    height: 85vh;
+    height: 90vh;
     top:15px;
     border-bottom: 1px solid #666666;
     border-right: 1px solid #666666;
     max-width: 96%;
     left:40px;
+
+    .ratio {
+        display: block;
+        visibility: hidden;
+        width: 100%;
+        height: auto;
+    }
 
     .times{
         position: absolute;
@@ -75,7 +82,9 @@
             }
         }
     }
+    .slots{}
 }
+
 
 
 

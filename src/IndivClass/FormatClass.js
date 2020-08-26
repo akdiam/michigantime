@@ -68,7 +68,7 @@ export function FormatClass( raw_section_info, class_name ) {
         let end_string = end['hour'] > 12 ? end['hour'] - 12 : end['hour'];
         
         start_string += `:${start['min'] === 0 ? '00' : start['min']}`;
-        end_string += `:${end['min'] === 0 ? '00' : end['min']}${end['hour'] < 12 ? ' a' : ' p'}m`;
+        end_string += `:${end['min'] === 0 ? '00' : end['min']}${end['hour'] < 12 ? 'a' : 'p'}m`;
         return `${start_string} - ${end_string}`;
     }   
 

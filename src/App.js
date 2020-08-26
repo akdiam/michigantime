@@ -28,7 +28,7 @@ const theme = createMuiTheme({
 
 function App(){
   const [currentSubj, selectSubj] = useState('');
-  const { pinnedClasses, pinnedOnSchedule, updatePinnedSched } = store();
+  const { pinnedOnSchedule, themeObj } = store();
 
   return (
     <div className="container">
@@ -56,9 +56,8 @@ function App(){
               </Grid>
               <Grid item xs = {7}>
                 <Calendar
-                pinned_classes={pinnedClasses}
                 pinned_on_schedule={pinnedOnSchedule}
-                update_pinned_sched={updatePinnedSched}/>
+                theme_obj={themeObj}/>
               </Grid>
             </Grid>
           </Grid>

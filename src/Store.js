@@ -89,8 +89,13 @@ export const store = create((set, get) => ({
             pinnedClasses: pinned,
             pinnedOnSchedule: pinned_on_schedule
         }))},
-    removeClassFromPinned: ( class_name ) =>   
+    removeClassFromPinned: ( class_name ) => {
+        let pinned_on_schedule = get().pinnedOnSchedule;
+        let new_schedule = pinned_on_schedule.filter(cl => { 
+            return cl['ClassName'] !== class_name;
+        })
         set(state => ({
-            pinnedClasses: omit(state.pinnedClasses, [class_name])
-        })),
+            pinnedClasses: omit(state.pinnedClasses, [class_name]),
+            pinnedOnSchedule: new_schedule
+        }))},
 }))

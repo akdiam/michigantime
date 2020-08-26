@@ -85,7 +85,7 @@ export default function ClassList({ current_subj, onBack }) {
                     <InfiniteScroll
                     dataLength={real_filtered.length}
                     hasMore={false}
-                    height={"87vh"}
+                    height={"86vh"}
                     >
                         {real_filtered.map((indiv_class, index) => {
                             return (
