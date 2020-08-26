@@ -8,7 +8,8 @@
         flex-direction: column;
         align-items: stretch;
         border-radius: 5px;
-  
+        overflow: hidden;
+
         .slot_info {
             flex: 1;
             display: flex;
@@ -16,7 +17,6 @@
             align-items: stretch;
             justify-content: center;
             padding: 0 8px;
-  
             .course_info {
                 display: flex;
                 font-weight: bold;

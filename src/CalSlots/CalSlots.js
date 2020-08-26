@@ -18,8 +18,12 @@ export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) =
     const theme = createMuiTheme({
         typography: {
             subtitle2: {
-                fontSize:15,
+                fontSize:14,
                 fontWeight: 2000,
+            },
+            caption: {
+                fontSize:11,
+                fontWeight: 1500,
             },
             allVariants: {
                 color:COLOR_SCHEME.text,
@@ -47,12 +51,12 @@ export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) =
                         <div className="slot_info">
                             <div classNam="course_info">
                                 <div className="course_name">
-                                    <Typography variant="subtitle2">{class_to_map['ClassName']} {class_to_map['Type']} {class_to_map['Section']}</Typography>
+                                    <Typography variant="subtitle2" noWrap>{class_to_map['ClassName']} {class_to_map['Type']} {class_to_map['Section']}</Typography>
                                 </div>
                             </div>
-                            <Typography variant="caption">{class_to_map['TimeString']}{' '+class_to_map['ID']}</Typography>
-                            <Typography variant="caption"></Typography>
-                            <Typography variant="caption">{class_to_map['Location']} {class_to_map['Instructor']}</Typography>
+                            <Typography variant="caption" noWrap>{class_to_map['TimeString']}{' '+class_to_map['ID']}</Typography>
+                            <Typography variant="caption" noWrap></Typography>
+                            <Typography variant="caption" noWrap>{class_to_map['Location']} {class_to_map['Instructor']}</Typography>
                         </div>
                     </ThemeProvider>
                 }
