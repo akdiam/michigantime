@@ -15,15 +15,26 @@ const days = ['M', 'T', 'W', 'R', 'F'];
 const start = 6;
 const end = 21;
 
-export const Calendar = React.memo(({ pinned_on_schedule, theme_obj }) => {
+export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile }) => {
     const createDispTime = time => {
         const hour = (time / 60) | 0;
         return `${hour > 12 ? hour - 12 : hour}${hour < 12 ? 'a' : 'p'}m`;
     }
+
+    let calheight = "88vh";
+    let calwidth = "96%";
+    let caltop = "15px";
+
+    if (isMobile) {
+        calheight = "85vh";
+        calwidth = "87%";
+        caltop = "20px";
+    }
+    
     
     // most calendar jsx and style borrowed from gtscheduler - thanks!
     return (
-        <div className="calContainer">
+        <div className="calContainer" style={{height: calheight, maxWidth: calwidth, top: caltop}}>
             <div className="times">
             {new Array((end - start)).fill(0).map((_, i) => {
                 const time = start * 60 + i * 60;
@@ -58,10 +69,10 @@ export const Calendar = React.memo(({ pinned_on_schedule, theme_obj }) => {
                     class_to_map={indiv_pin}
                     class_name={indiv_pin['ClassName']}
                     theme_obj={theme_obj}
+                    isMobile={isMobile}
                      />)
                 })}
             </div>
         </div>
-            
     )
 })

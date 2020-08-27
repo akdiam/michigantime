@@ -16,6 +16,7 @@
     "react-dom": "^16.13.1",
     "react-infinite-scroll-component": "^5.0.5",
     "react-scripts": "3.4.3",
+    "react-swipeable-views": "^0.13.9",
     "zustand": "^3.0.1"
   },
   "scripts": {

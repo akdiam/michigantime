@@ -14,14 +14,17 @@ const theme = createMuiTheme({
         },
     }
 })
-
-export default function ClassList({ onSelection }) {
+// was 92
+export default function ClassList({ onSelection, isMobile }) {
+    let height = "92vh";
+    if (isMobile)
+        height = "86vh"; 
     return (
         <div className="subjlist">
             <InfiniteScroll
             dataLength={ClassNames.length}
             hasMore={false}
-            height={"92vh"}
+            height={height}
             >
                 {ClassNames.map((indiv_class, index) => {
                     return (

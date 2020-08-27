@@ -5,13 +5,11 @@ import { IndivClass } from '../IndivClass/IndivClass';
 import Grid from '@material-ui/core/Grid';
 import './ScheduledClasses.css';
 
-export const ScheduledClasses = React.memo(() => {
-    const { scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned } = store();
+export const ScheduledClasses = React.memo(({ scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned }) => {
     //const removeClass = state => state.removeClass;
     let keys = Object.keys(scheduledClasses);
     return (
         <div className="parent">
-            {keys.length !== 0 ? 
                 <div className="scroller">
                     <Grid container spacing={0} direction="column">
                     {keys.reverse().map((item, index) => {
@@ -31,15 +29,8 @@ export const ScheduledClasses = React.memo(() => {
                             />
                         )
                     })}
-                </Grid>
+                    </Grid>
                 </div>
-                :
-                <div className="warning-msg">
-                    <Typography>
-                        If you see a '?' next to a section, that section is not on the LSA Course Guide
-                    </Typography>
-                </div>
-            }
         </div>
     )
 })

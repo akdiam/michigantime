@@ -8,7 +8,7 @@ import './CalSlots.scss';
 const start = 6*60;
 const end = 21*60;
 
-export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) => {
+export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj, isMobile } ) => {
     console.log(class_to_map);
     const COLOR_SCHEME = Themes[theme_obj[class_name]];
     console.log(COLOR_SCHEME);
@@ -27,9 +27,17 @@ export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) =
             },
             allVariants: {
                 color:COLOR_SCHEME.text,
+            }, 
+            subtitle1: {
+                fontSize: 12,
+                fontWeight: 2000,
             }
         }
     });
+    let slotpadding = "0 8px";
+    if (isMobile) {
+        slotpadding = "0 1px";
+    }
     return (
         <div className="slot_container">
             {day_arr && class_start !== {} && day_arr.map(day => { 
@@ -48,8 +56,9 @@ export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) =
                     }}>
                 {       
                     <ThemeProvider theme={theme}>
+                        {!isMobile ? 
                         <div className="slot_info">
-                            <div classNam="course_info">
+                            <div className="course_info">
                                 <div className="course_name">
                                     <Typography variant="subtitle2" noWrap>{class_to_map['ClassName']} {class_to_map['Type']} {class_to_map['Section']}</Typography>
                                 </div>
@@ -58,6 +67,16 @@ export const CalSlots = React.memo(( { class_to_map, class_name, theme_obj } ) =
                             <Typography variant="caption" noWrap></Typography>
                             <Typography variant="caption" noWrap>{class_to_map['Location']} {class_to_map['Instructor']}</Typography>
                         </div>
+                        :
+                        <div className="slot_info" style={{padding:slotpadding}}>
+                            <div className="course_info">
+                                <div className="course_name">
+                                    <Typography variant="subtitle1">{class_to_map['ClassName']}</Typography>
+                                    <Typography variant="caption" noWrap>{class_to_map['Type']} {class_to_map['Section']}</Typography>
+                                </div>
+                            </div>
+                        </div>
+                        }
                     </ThemeProvider>
                 }
                 </div>

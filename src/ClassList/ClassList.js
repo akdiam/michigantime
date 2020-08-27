@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     }
 });
 
-export default function ClassList({ current_subj, onBack }) {
+export default function ClassList({ current_subj, onBack, isMobile }) {
     const subj_to_find = '(' + current_subj + ')';
     const relevant_classes = ClassListing.filter(subj => subj['Subject'].includes(subj_to_find));
     let seen_nbrs = {};
@@ -70,6 +70,10 @@ export default function ClassList({ current_subj, onBack }) {
         }
     })
 
+    let height = "87vh"
+    if (isMobile)
+        height = "79vh"
+
     return (
         <div className="classlist">
             <Grid container spacing={2} direction="column">
@@ -85,7 +89,7 @@ export default function ClassList({ current_subj, onBack }) {
                     <InfiniteScroll
                     dataLength={real_filtered.length}
                     hasMore={false}
-                    height={"86vh"}
+                    height={height}
                     >
                         {real_filtered.map((indiv_class, index) => {
                             return (
