@@ -26,7 +26,7 @@ export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile })
     let caltop = "15px";
 
     if (isMobile) {
-        calheight = "85vh";
+        calheight = "83vh";
         calwidth = "87%";
         caltop = "20px";
     }

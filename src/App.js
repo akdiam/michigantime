@@ -38,6 +38,17 @@ function a11yProps(index) {
   };
 }
 
+function TabPanel( props ) {
+  const { children, value, index } = props;
+  return (
+    <div
+    hidden={value!=index}>
+      {value === index && (children)
+      }
+    </div>
+  )
+}
+
 function App(){
   const [currentSubj, selectSubj] = useState('');
   const [mobile, setMobile] = useState(isMobile());
@@ -95,11 +106,13 @@ function App(){
                 {currentSubj.length === 0 ? 
                 <SubjList
                   onSelection={chosen_subj => selectSubj(chosen_subj)}
+                  isMobile={mobile}
                 /> 
                 : 
                 <ClassList
                   current_subj={currentSubj}
                   onBack={() => selectSubj('')}
+                  isMobile={mobile}
                 />
                 }
               </Grid>
@@ -121,8 +134,58 @@ function App(){
                 theme_obj={themeObj}/>
               </Grid>
             </Grid>
-            :
-            <SwipeableViews
+            : <SwipeableViews
+            axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
+            index={value}
+            onChangeIndex={handleChangeIndex}
+          >
+              <Grid item style={value===0 ? {maxHeight:"100%", overflow:"auto"}:{display:"none"}}>
+              {currentSubj.length === 0 ? 
+              <SubjList
+                onSelection={chosen_subj => selectSubj(chosen_subj)}
+                isMobile={mobile}
+              /> 
+              : 
+              <ClassList
+                current_subj={currentSubj}
+                onBack={() => selectSubj('')}
+                isMobile={mobile}
+              />
+              }
+            </Grid>
+            <Grid item style={value===1 ? {maxHeight:"90vh", overflow:"auto"}:{display:"none"}}>
+              <ScheduledClasses
+              scheduledClasses={scheduledClasses}
+              classTitles={classTitles}
+              themeObj={themeObj}
+              removeClass={removeClass}
+              removeThemeFromObj={removeThemeFromObj}
+              removeTitle={removeTitle}
+              addPin={addPin}
+              removePin={removePin}
+              removeClassFromPinned={removeClassFromPinned}/>
+            </Grid>
+            <Grid item 
+             style={value===2 ?{display:"block"}:{display:"none"}}>
+            <Calendar
+             pinned_on_schedule={pinnedOnSchedule}
+             theme_obj={themeObj}
+             isMobile={mobile}
+             />
+             </Grid>
+            </SwipeableViews>
+            } 
+          </Grid>
+        </Paper>
+      </ThemeProvider>
+    </div>
+  );
+}
+
+export default App;
+
+/*
+<SwipeableViews
               index={value}
               onChangeIndex={handleChangeIndex}
             >
@@ -165,12 +228,5 @@ function App(){
              isMobile={mobile}
              />
              }
-            </SwipeableViews>} 
-          </Grid>
-        </Paper>
-      </ThemeProvider>
-    </div>
-  );
-}
-
-export default App;
+            </SwipeableViews>
+*/
