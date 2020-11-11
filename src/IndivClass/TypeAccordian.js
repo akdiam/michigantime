@@ -24,6 +24,7 @@ const theme = createMuiTheme({
     },
 });
 const class_types = {'LEC': 'Lectures', 'LAB': 'Labs', 'DIS': 'Discussions', 'REC': 'Recitations', 'SEM': 'Seminars'};
+const reverse_types = {'Lectures': 'LEC', 'Labs': 'LAB', 'Discussions': 'DIS', 'Recitations': 'REC', 'Seminars': 'SEM'};
 
 export const TypeAccordian = React.memo(({ display_type, display_object, class_name, colorScheme, addPin, removePin, pinToRemove, satisfyPinsOnSched }) => {
     const [pinnedArr, changePinned] = useState(new Array(display_object.length).fill(false));
@@ -58,7 +59,9 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
     }, []);
 
     useEffect(() => {
-        if (Object.keys(pinToRemove).length !== 0) {
+        console.log('class_name:', class_name);
+        console.log('disp_Type:', display_type);
+        if (Object.keys(pinToRemove).length !== 0 && pinToRemove['ClassName'] === class_name && pinToRemove['Type'] === reverse_types[display_type]) {
             let index_to_rm = pinToRemove['Index'];
             let new_pinnedArr = pinnedArr;
             new_pinnedArr[index_to_rm] = false;
