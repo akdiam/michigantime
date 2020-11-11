@@ -24,7 +24,8 @@ const theme = createMuiTheme({
     }
 });
 
-export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned }) => {
+export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv_class_title, indiv_theme, removeClass, removeThemeFromObj, 
+                                    removeTitle, addPin, removePin, removeClassFromPinned, pinToRemove, satisfyPinsOnSched }) => {
     const classObj = indiv_scheduled_class;
     const keys = Object.keys(classObj);
     const title = indiv_class_title;
@@ -58,7 +59,7 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
     }
 
     let is_msg = '';
-    if (dispObj == {}) {
+    if (dispObj === {}) {
         is_msg = 'Independent Study';
     }
     
@@ -125,11 +126,13 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                                 class_name={class_name}
                                 colorScheme={COLOR_SCHEME}
                                 addPin={addPin}
-                                removePin={removePin}/>
+                                removePin={removePin}
+                                pinToRemove={pinToRemove}
+                                satisfyPinsOnSched={satisfyPinsOnSched}/>
                             )
                         }) : 
                         <Grid item xs = {12}>
-                        <Typography>{is_msg}sss</Typography> </Grid> }
+                        <Typography>{is_msg}sss</Typography> </Grid>}
                         </Grid>
                     </AccordianDetails>
                 </Accordian>

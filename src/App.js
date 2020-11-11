@@ -4,7 +4,7 @@ import Grid from '@material-ui/core/Grid';
 import Header from './Header/Header';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
-import Paper from '@material-ui/core/Paper'
+import Paper from '@material-ui/core/Paper';
 import SwipeableViews from 'react-swipeable-views';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { useTheme } from '@material-ui/core/styles';
@@ -12,6 +12,7 @@ import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
 import { ScheduledClasses } from './ScheduledClasses/ScheduledClasses';
 import { Calendar } from './Calendar/Calendar';
+import ConflictModal from './ConflictModal/ConflictModal';
 import { store } from './Store';
 
 const theme = createMuiTheme({
@@ -53,10 +54,9 @@ function App(){
   const [currentSubj, selectSubj] = useState('');
   const [mobile, setMobile] = useState(isMobile());
   const [value, setValue] = React.useState(0);
-  const { pinnedOnSchedule, themeObj, scheduledClasses, classTitles, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned } = store();
-  
-  
-  console.log(mobile);
+  const { pinnedOnSchedule, themeObj, scheduledClasses, classTitles, removeClass, removeThemeFromObj, removeTitle, addPin, 
+          removePin, removeClassFromPinned, hasConflict, oldClass, newClass, resolveConflict, pinToRemove, updatePinsOnSched, satisfyPinsOnSched } = store();
+  console.log(pinnedOnSchedule);
   useEffect(() => {
     const handleResize = (e) => {
       const newMobile = isMobile();
@@ -82,6 +82,13 @@ function App(){
     <div className="container" style={{height:"88vh"}}>
       <ThemeProvider theme={theme}>
         <Paper style={{height:"100vh"}}>
+          <ConflictModal
+          hasConflict={hasConflict}
+          resolveConflict={resolveConflict}
+          oldClass={oldClass}
+          newClass={newClass}
+          updatePinsOnSched={updatePinsOnSched}
+          />
           <Grid container spacing={2} direction="column">
             <Grid item xs = {12}>
               {<Header/>}
@@ -126,19 +133,22 @@ function App(){
                 removeTitle={removeTitle}
                 addPin={addPin}
                 removePin={removePin}
-                removeClassFromPinned={removeClassFromPinned}/>
+                removeClassFromPinned={removeClassFromPinned}
+                pinToRemove={pinToRemove}
+                satisfyPinsOnSched={satisfyPinsOnSched}/>
               </Grid>
               <Grid item xs = {7}>
                 <Calendar
                 pinned_on_schedule={pinnedOnSchedule}
-                theme_obj={themeObj}/>
+                theme_obj={themeObj}
+                isMobile={mobile}
+                />
               </Grid>
             </Grid>
             : <SwipeableViews
             axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
             index={value}
-            onChangeIndex={handleChangeIndex}
-          >
+            onChangeIndex={handleChangeIndex}>
               <Grid item style={value===0 ? {maxHeight:"100%", overflow:"auto"}:{display:"none"}}>
               {currentSubj.length === 0 ? 
               <SubjList
@@ -163,7 +173,9 @@ function App(){
               removeTitle={removeTitle}
               addPin={addPin}
               removePin={removePin}
-              removeClassFromPinned={removeClassFromPinned}/>
+              removeClassFromPinned={removeClassFromPinned}
+              pinToRemove={pinToRemove}
+              satisfyPinsOnSched={satisfyPinsOnSched}/>
             </Grid>
             <Grid item 
              style={value===2 ?{display:"block"}:{display:"none"}}>

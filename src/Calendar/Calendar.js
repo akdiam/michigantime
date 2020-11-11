@@ -1,21 +1,18 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
-import Grid from '@material-ui/core/Grid';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
-import ArrowForwardIcon from '@material-ui/icons/ArrowForward';
-import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Typography from '@material-ui/core/Typography';
 import { Themes } from '../Themes/Themes';
 import { CalSlots } from '../CalSlots/CalSlots';
 //import { updateAllSchedules } from './updateAllSchedules';
 import './Calendar.scss';
+import { CalendarViewDaySharp } from '@material-ui/icons';
 
 const days = ['M', 'T', 'W', 'R', 'F'];
 const start = 6;
 const end = 21;
 
-export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile }) => {
+export const Calendar = ({ pinned_on_schedule, theme_obj, isMobile }) => {
+    console.log('calendar render')
+    console.log(`pinned_on_schedule: ${pinned_on_schedule}`)
     const createDispTime = time => {
         const hour = (time / 60) | 0;
         return `${hour > 12 ? hour - 12 : hour}${hour < 12 ? 'a' : 'p'}m`;
@@ -30,7 +27,6 @@ export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile })
         calwidth = "87%";
         caltop = "20px";
     }
-    
     
     // most calendar jsx and style borrowed from gtscheduler - thanks!
     return (
@@ -52,7 +48,7 @@ export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile })
             <div className="days">
                 {days.map((day, i) => {
                     return (
-                        <div className="day"> 
+                        <div className="day" key={day}> 
                             <span className="dayLabel">
                                 <Typography>
                                     {day} 
@@ -75,4 +71,4 @@ export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile })
             </div>
         </div>
     )
-})
+}

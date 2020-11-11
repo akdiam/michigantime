@@ -1,5 +1,5 @@
 import React, {useMemo} from 'react';
-import ClassListing from './FA2020';
+import ClassListing from './WN2021';
 import InfiniteScroll from 'react-infinite-scroll-component';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
@@ -61,7 +61,7 @@ export default function ClassList({ current_subj, onBack, isMobile }) {
 
     const { addClass, addTitle, addThemeToObj, availableThemeIndeces, classTitles } = store();
     let real_filtered = filtered_classes.filter(subj => {
-        let class_name = current_subj+subj['Catalog Nbr'];
+        let class_name = current_subj+' '+subj['Catalog Nbr'];
         if (class_name in classTitles) {
             return false;
         }
@@ -102,7 +102,7 @@ export default function ClassList({ current_subj, onBack, isMobile }) {
                                     style={{height:"100%", padding:0}}
                                     onClick={() => {
                                         const class_to_add = gatherAllClasses(indiv_class['Catalog Nbr']);
-                                        const class_name = current_subj+indiv_class['Catalog Nbr'];
+                                        const class_name = current_subj+' '+indiv_class['Catalog Nbr'];
                                         const class_title = indiv_class['Course Title'];
                                         addClass(class_to_add, class_name);
                                         addTitle(class_title, class_name);
@@ -116,7 +116,7 @@ export default function ClassList({ current_subj, onBack, isMobile }) {
                                             <Grid container spacing={0} direction="column">
                                                 <Grid item xs={12}>
                                                     <Typography variant="subtitle2">
-                                                    {current_subj}{indiv_class['Catalog Nbr']} 
+                                                    {current_subj} {indiv_class['Catalog Nbr']} 
                                                     </Typography>
                                                 </Grid>
                                                 <Grid item xs={12}>

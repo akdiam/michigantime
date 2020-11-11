@@ -116,10 +116,11 @@ export function FormatClass( raw_section_info, class_name ) {
         indiv_formatted_info['Instructor'] = raw_section_info[i]['Instructor'];
         indiv_formatted_info['Location'] = raw_section_info[i]['Location'];
         indiv_formatted_info['Credits'] = parseInt(raw_section_info[i]['Units']);
-        indiv_formatted_info['Section'] = raw_section_info[i]['Section'].trim();
+        indiv_formatted_info['Section'] = raw_section_info[i]['Section'];
         indiv_formatted_info['ID'] = parseInt(raw_section_info[i]['Class Nbr']);
         indiv_formatted_info['ClassName'] = class_name;
         indiv_formatted_info['Type'] = raw_section_info[i]['Component'];
+        indiv_formatted_info['Index'] = i;
         all_formatted_info.push(indiv_formatted_info);
     }
     return (all_formatted_info);

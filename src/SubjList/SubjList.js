@@ -27,6 +27,7 @@ export default function ClassList({ onSelection, isMobile }) {
             height={height}
             >
                 {ClassNames.map((indiv_class, index) => {
+                    console.log(indiv_class);
                     return (
                     <Paper elevation={0} style={{margin:5, padding:5, whiteSpace:"nowrap", overflow:"hidden"}} key={index}>
                         <Button

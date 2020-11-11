@@ -8,6 +8,7 @@ export function checkConflict(potential_add, already_added) {
     let has_conflict = false;
     const days_map = {'M': 1, 'T': 2, 'W': 3, 'R': 4, 'F': 5};
     let already_added_ranges = [];
+    let indeces = [];
     for (let i = 0; i < already_added.length; ++i) {
         for (let j = 0; j < already_added[i]['DaysArr'].length; ++j) {
             let innerobj = {};
@@ -18,6 +19,7 @@ export function checkConflict(potential_add, already_added) {
             const start = moment({h: start_hour, m: start_min}).day(days_map[already_added[i]['DaysArr'][j]]);
             const end = moment({h: end_hour, m: end_min}).day(days_map[already_added[i]['DaysArr'][j]]);
             const interval = [start, end];
+            indeces.push(i);
             already_added_ranges.push(mom.range(interval));
         }
     }
@@ -37,9 +39,9 @@ export function checkConflict(potential_add, already_added) {
     for (let i = 0; i < already_added_ranges.length; ++i) {
         for (let j = 0; j < potential_added_ranges.length; ++j) {
             if (already_added_ranges[i].overlaps(potential_added_ranges[j])) {
-                return true;
+                return [true, already_added[indeces[i]]];
             }
         }
     }
-    return false;
+    return [false, null];
 }

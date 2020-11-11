@@ -5,7 +5,8 @@ import { IndivClass } from '../IndivClass/IndivClass';
 import Grid from '@material-ui/core/Grid';
 import './ScheduledClasses.css';
 
-export const ScheduledClasses = React.memo(({ scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, removeTitle, addPin, removePin, removeClassFromPinned }) => {
+export const ScheduledClasses = React.memo(({ scheduledClasses, classTitles, themeObj, removeClass, removeThemeFromObj, 
+                                            removeTitle, addPin, removePin, removeClassFromPinned, pinToRemove, satisfyPinsOnSched }) => {
     //const removeClass = state => state.removeClass;
     let keys = Object.keys(scheduledClasses);
     return (
@@ -26,6 +27,8 @@ export const ScheduledClasses = React.memo(({ scheduledClasses, classTitles, the
                             addPin={addPin}
                             removePin={removePin}
                             removeClassFromPinned={removeClassFromPinned}
+                            pinToRemove={pinToRemove}
+                            satisfyPinsOnSched={satisfyPinsOnSched}
                             />
                         )
                     })}
