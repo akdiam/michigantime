@@ -11,6 +11,8 @@ import { TypeAccordian } from './TypeAccordian';
 import DeleteIcon from '@material-ui/icons/Delete';
 import VpnLockIcon from '@material-ui/icons/VpnLock';
 import IconButton from '@material-ui/core/IconButton';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
+import Tooltip from '@material-ui/core/Tooltip';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core'
 import { Themes } from '../Themes/Themes';
 import './IndivClass.css';
@@ -81,6 +83,14 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
         window.open(atlasURL);
     }
 
+    const takeToCG = event => {
+        event.stopPropagation();
+        const num = class_name.match(/\d+/)[0].trim();
+        const subj = class_name.match(/[A-Z]+/)[0].trim();
+        const cgURL = `https://www.lsa.umich.edu/cg/cg_results.aspx?termArray=w_21_2320&cgtype=ug&show=20&department=${subj}&catalog=${num}`;
+        window.open(cgURL);
+    }
+
     return (
         <div className="parent">
             <ThemeProvider theme={accordianTheme}>
@@ -105,14 +115,24 @@ export const IndivClass = React.memo(({ class_name, indiv_scheduled_class, indiv
                                 </Grid>
                             </Grid>
                         </ThemeProvider>
-                        <IconButton 
-                        onClick={takeToAtlas}>
-                            <VpnLockIcon/>
-                        </IconButton>
-                        <IconButton
-                        onClick={delClass}>
-                            <DeleteIcon/>
-                        </IconButton>
+                        <Tooltip title="Course Guide" placement="top">
+                            <IconButton
+                            onClick={takeToCG}>
+                                <MenuBookIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Atlas" placement="top">
+                            <IconButton 
+                            onClick={takeToAtlas}>
+                                <VpnLockIcon/>
+                            </IconButton>
+                        </Tooltip>
+                        <Tooltip title="Remove Class" placement="top">
+                            <IconButton
+                            onClick={delClass}>
+                                <DeleteIcon/>
+                            </IconButton>
+                        </Tooltip>
                     </AccordianSummary>
                     <AccordianDetails>
                         <Grid container spacing = {0} direction="row">
