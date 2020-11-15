@@ -23,12 +23,15 @@ const theme = createMuiTheme({
 
 export const IndivSection = React.memo(({ item, class_name, display_type, addPin, removePin, pinnedArr, updatePinned, index }) => {
     let pinned = store(useCallback(state => state.pinnedClasses[class_name], [class_name]));
+    let scheduled_class = store(useCallback(state => state.scheduledClasses[class_name], [class_name]));
+
     if (!pinned) {
         pinned = {};
     }
     const handleClick = () => {
         let new_pinned = [...pinnedArr];
         new_pinned.fill(false);
+        console.log(scheduled_class)
         if (pinnedArr[index] === false) {
             pinned[display_type] = [item];
             console.log(pinnedArr[index])

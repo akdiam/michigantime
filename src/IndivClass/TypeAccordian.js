@@ -62,9 +62,10 @@ export const TypeAccordian = React.memo(({ display_type, display_object, class_n
         console.log('class_name:', class_name);
         console.log('disp_Type:', display_type);
         if (Object.keys(pinToRemove).length !== 0 && pinToRemove['ClassName'] === class_name && pinToRemove['Type'] === reverse_types[display_type]) {
-            let index_to_rm = pinToRemove['Index'];
+            /*let index_to_rm = pinToRemove['Index'];
             let new_pinnedArr = pinnedArr;
-            new_pinnedArr[index_to_rm] = false;
+            new_pinnedArr[index_to_rm] = false;*/
+            let new_pinnedArr = new Array(display_object.length).fill(false);
             changePinned(new_pinnedArr);
             satisfyPinsOnSched();
         }

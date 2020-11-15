@@ -10,7 +10,7 @@ const days = ['M', 'T', 'W', 'R', 'F'];
 const start = 6;
 const end = 21;
 
-export const Calendar = ({ pinned_on_schedule, theme_obj, isMobile }) => {
+export const Calendar = React.memo(({ pinned_on_schedule, theme_obj, isMobile }) => {
     console.log('calendar render')
     console.log(`pinned_on_schedule: ${pinned_on_schedule}`)
     const createDispTime = time => {
@@ -71,4 +71,4 @@ export const Calendar = ({ pinned_on_schedule, theme_obj, isMobile }) => {
             </div>
         </div>
     )
-}
+})

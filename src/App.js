@@ -5,9 +5,10 @@ import Header from './Header/Header';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Paper from '@material-ui/core/Paper';
+import TextField from '@material-ui/core/TextField';
 import SwipeableViews from 'react-swipeable-views';
 import { ThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { useTheme } from '@material-ui/core/styles';
+import { ClassNames } from './ClassNames';
 import SubjList from './SubjList/SubjList';
 import ClassList from './ClassList/ClassList';
 import { ScheduledClasses } from './ScheduledClasses/ScheduledClasses';
@@ -44,8 +45,7 @@ function TabPanel( props ) {
   return (
     <div
     hidden={value!=index}>
-      {value === index && (children)
-      }
+      {value === index && (children)}
     </div>
   )
 }
@@ -54,9 +54,10 @@ function App(){
   const [currentSubj, selectSubj] = useState('');
   const [mobile, setMobile] = useState(isMobile());
   const [value, setValue] = React.useState(0);
+  const [formText, setFormText] = useState('');
   const { pinnedOnSchedule, themeObj, scheduledClasses, classTitles, removeClass, removeThemeFromObj, removeTitle, addPin, 
           removePin, removeClassFromPinned, hasConflict, oldClass, newClass, resolveConflict, pinToRemove, updatePinsOnSched, satisfyPinsOnSched } = store();
-  console.log(pinnedOnSchedule);
+
   useEffect(() => {
     const handleResize = (e) => {
       const newMobile = isMobile();
@@ -70,6 +71,15 @@ function App(){
     };
   }, [mobile]);
 
+  useEffect(() => {
+    if (ClassNames.includes(formText)) {
+      selectSubj(formText);
+    }
+    else if (formText.length === 0) {
+      selectSubj('');
+    }
+  }, [formText])
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -77,6 +87,11 @@ function App(){
   const handleChangeIndex = (index) => {
     setValue(index);
   };
+
+  const handleFormChange = (e) => {
+    let new_form_val = e.target.value.toUpperCase();
+    setFormText(new_form_val);
+  }
 
   return (
     <div className="container" style={{height:"88vh"}}>
@@ -110,16 +125,21 @@ function App(){
             {!mobile ? 
             <Grid item xs = {12} container spacing={2} style={{height:"96vh"}}> 
               <Grid item xs = {2} style={{maxHeight:"100%", overflow:"auto"}}>
+                <form className='hi' noValidate autoComplete='off' onSubmit={e=>e.preventDefault()}>
+                  <TextField id='search' label='Search for a class' variant='outlined' onChange={handleFormChange} /> 
+                </form>
                 {currentSubj.length === 0 ? 
                 <SubjList
                   onSelection={chosen_subj => selectSubj(chosen_subj)}
                   isMobile={mobile}
+                  formText={formText}
                 /> 
                 : 
                 <ClassList
                   current_subj={currentSubj}
                   onBack={() => selectSubj('')}
                   isMobile={mobile}
+                  formText={formText}
                 />
                 }
               </Grid>

@@ -133,7 +133,7 @@ export const store = create((set, get) => ({
                     if (pinned[classKey][typeKey][i]['TimeString'] !== "ARR") {
                         pinned_on_schedule.push(pinned[classKey][typeKey][i]);
                     }
-                }   
+                }
             }
         }
         /*let has_conflict = false;

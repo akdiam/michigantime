@@ -1,3 +1,5 @@
 TASK                            DATE ADDED              DATE COMPLETED 
-1. Popup for class conflicts    10/19/20
+1. Popup for class conflicts    10/19/20                11/12/20
 2. Class availabilities         10/19/20
+3. Time zone selection          11/13/20
+4. Add distr. requirements                      

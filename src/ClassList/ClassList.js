@@ -19,7 +19,7 @@ const theme = createMuiTheme({
     }
 });
 
-export default function ClassList({ current_subj, onBack, isMobile }) {
+export default function ClassList({ current_subj, onBack, isMobile, formText }) {
     const subj_to_find = '(' + current_subj + ')';
     const relevant_classes = ClassListing.filter(subj => subj['Subject'].includes(subj_to_find));
     let seen_nbrs = {};
@@ -60,8 +60,8 @@ export default function ClassList({ current_subj, onBack, isMobile }) {
     };
 
     const { addClass, addTitle, addThemeToObj, availableThemeIndeces, classTitles } = store();
-    let real_filtered = filtered_classes.filter(subj => {
-        let class_name = current_subj+' '+subj['Catalog Nbr'];
+    let real_filtered = filtered_classes.filter(indiv_class => {
+        let class_name = current_subj+' '+indiv_class['Catalog Nbr'];
         if (class_name in classTitles) {
             return false;
         }
@@ -70,7 +70,19 @@ export default function ClassList({ current_subj, onBack, isMobile }) {
         }
     })
 
-    let height = "87vh"
+    // filtering on form search
+    let form_num = formText.replace(/\D/g, '');
+    console.log(form_num)
+    if (form_num.length > 0) {
+        real_filtered = real_filtered.filter(indiv_class => {
+            let cat_num = indiv_class['Catalog Nbr'];
+            if ((cat_num+'').indexOf(form_num) > -1) {
+                return true;
+            }
+            return false;
+        });
+    }
+    let height = "80vh"
     if (isMobile)
         height = "79vh"
 
