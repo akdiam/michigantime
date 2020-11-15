@@ -174,12 +174,14 @@ function App(){
               <SubjList
                 onSelection={chosen_subj => selectSubj(chosen_subj)}
                 isMobile={mobile}
+                formText={formText}
               /> 
               : 
               <ClassList
                 current_subj={currentSubj}
                 onBack={() => selectSubj('')}
                 isMobile={mobile}
+                formText={formText}
               />
               }
             </Grid>
